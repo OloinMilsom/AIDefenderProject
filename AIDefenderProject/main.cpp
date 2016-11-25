@@ -63,9 +63,6 @@ int main()
 		//prepare frame
 		window.clear();
 
-		//draw frame items
-		window.draw(text);
-
 		window.draw(circle);
 
 
