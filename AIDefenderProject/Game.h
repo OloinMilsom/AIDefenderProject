@@ -24,8 +24,9 @@
 #include <iostream> 
 #define _USE_MATH_DEFINES
 #include <math.h>
-#include "InputManager.h"
 
+#include "InputManager.h"
+#include "Player.h"
 
 ////////////////////////////////////////////////////////////
 ///Entrypoint of application 
@@ -35,8 +36,11 @@ class Game : EventListener {
 private:
 	sf::RenderWindow * m_window;
 	InputManager m_inputManager;
+	Player * m_player;
+	sf::Clock m_clock;
+	float m_lastFrameTime;
 
-	void update();
+	void update(float dt);
 	void render();
 public:
 	Game();

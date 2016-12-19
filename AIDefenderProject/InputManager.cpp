@@ -54,6 +54,9 @@ void InputManager::processInput() {
 			break;
 		case sf::Event::KeyPressed:
 			dispatch(e);
+			break; 
+		case sf::Event::KeyReleased:
+			dispatch(e);
 			break;
 		}
 
