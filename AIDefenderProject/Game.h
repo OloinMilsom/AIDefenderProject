@@ -27,6 +27,7 @@
 
 #include "InputManager.h"
 #include "Player.h"
+#include "Terrain.h"
 
 ////////////////////////////////////////////////////////////
 ///Entrypoint of application 
@@ -36,7 +37,10 @@ class Game : EventListener {
 private:
 	sf::RenderWindow * m_window;
 	InputManager m_inputManager;
+	
 	Player * m_player;
+	Terrain m_terrain;
+	
 	sf::Clock m_clock;
 	float m_lastFrameTime;
 

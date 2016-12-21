@@ -96,3 +96,11 @@ void Player::onEvent(sf::Event evt) {
 		break;
 	}
 }
+
+sf::Vector2f Player::getPosition() const {
+	return m_pos;
+}
+
+void Player::setPosition(sf::Vector2f val) {
+	m_pos = val;
+}

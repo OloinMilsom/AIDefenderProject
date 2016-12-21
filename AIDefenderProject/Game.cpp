@@ -1,9 +1,12 @@
 #include "Game.h"
 
 Game::Game (){
+	srand(std::time(0));
+
 	m_window = new sf::RenderWindow(sf::VideoMode(800, 600, 32), "SFML First Program");
 
 	m_player = new Player();
+	m_terrain = Terrain(m_window->getSize().x, 500, 7);
 
 	m_inputManager = InputManager(m_window);
 	m_inputManager.addListener(sf::Event::Closed, this);
@@ -15,6 +18,10 @@ Game::Game (){
 void Game::update(float dt) {
 	m_inputManager.processInput();
 	m_player->update(dt);
+	sf::Vector2f playerPos = m_player->getPosition();
+	float temp = m_terrain.underneath(playerPos);
+	playerPos.y += temp;
+	m_player->setPosition(playerPos);
 }
 
 void Game::render() {
@@ -22,6 +29,7 @@ void Game::render() {
 	m_window->clear();
 
 	m_player->render(m_window);
+	m_terrain.render(m_window);
 
 	// Finally, display rendered frame on screen 
 	m_window->display();
@@ -31,8 +39,10 @@ void Game::loop() {
 	while (m_window->isOpen()) {
 		float now = m_clock.getElapsedTime().asSeconds();
 		float dt = now - m_lastFrameTime;
+
 		update(dt);
 		render();
+
 		m_lastFrameTime = now;
 	}
 }

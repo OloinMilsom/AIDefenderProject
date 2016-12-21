@@ -6,7 +6,7 @@ class Player : public EventListener {
 private:
 	// consts in pixels and seconds
 	const float MAX_X_VEL = 300.0f;
-	const float X_ACCEL = 175.0f;
+	const float X_ACCEL = 200.0f;
 	const float Y_SPEED = 100.0f;
 
 	sf::Vector2f m_pos;
@@ -18,4 +18,6 @@ public:
 	void update(float dt);
 	void render(sf::RenderWindow * window);
 	void onEvent(sf::Event evt);
+	sf::Vector2f getPosition() const;
+	void setPosition(sf::Vector2f);
 };
