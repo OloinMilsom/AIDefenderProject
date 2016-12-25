@@ -124,6 +124,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -131,6 +133,8 @@
     <ClCompile Include="Terrain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletManager.h" />
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputManager.h" />

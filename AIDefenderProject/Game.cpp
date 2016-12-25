@@ -13,6 +13,8 @@ Game::Game (){
 	m_inputManager.addListener(sf::Event::KeyPressed, this);
 	m_inputManager.addListener(sf::Event::KeyPressed, m_player);
 	m_inputManager.addListener(sf::Event::KeyReleased, m_player);
+
+	m_bulletManager = BulletManager();
 }
 
 void Game::update(float dt) {
@@ -22,6 +24,7 @@ void Game::update(float dt) {
 	float temp = m_terrain.underneath(playerPos);
 	playerPos.y += temp;
 	m_player->setPosition(playerPos);
+	m_bulletManager.Update();
 }
 
 void Game::render() {
@@ -30,6 +33,7 @@ void Game::render() {
 
 	m_player->render(m_window);
 	m_terrain.render(m_window);
+	m_bulletManager.render(m_window);
 
 	// Finally, display rendered frame on screen 
 	m_window->display();
@@ -58,6 +62,16 @@ void Game::onEvent(sf::Event evt) {
 		case sf::Keyboard::Escape:
 			m_window->close();
 			break;
+		case sf::Keyboard::Space:
+			if (m_player->getDirection())
+			{
+				m_bulletManager.AddBullet(m_player->getPosition(), sf::Vector2f(0.1f, 0), false); //Moving Right
+			}
+			else
+			{
+				m_bulletManager.AddBullet(m_player->getPosition(), sf::Vector2f(-0.1f, 0), false); //Moving Left
+			}
+			
 		default:
 			break;
 		}
