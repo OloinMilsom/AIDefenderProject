@@ -12,6 +12,7 @@ private:
 	sf::Vector2f m_pos;
 	sf::RectangleShape m_sprite;
 	bool m_keyDowns[4]; // 0 = W, 1 = A, 2 = S, 3 = D
+	bool m_movingRight;
 	float m_xVel;
 public:
 	Player();
@@ -20,4 +21,5 @@ public:
 	void onEvent(sf::Event evt);
 	sf::Vector2f getPosition() const;
 	void setPosition(sf::Vector2f);
+	bool getDirection();
 };

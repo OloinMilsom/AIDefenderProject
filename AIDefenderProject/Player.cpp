@@ -6,6 +6,7 @@ Player::Player() : m_xVel(0) {
 	}
 	m_sprite = sf::RectangleShape(sf::Vector2f(20, 10));
 	m_sprite.setFillColor(sf::Color::Red);
+	m_movingRight = true;
 }
 
 void Player::update(float dt) {
@@ -62,12 +63,14 @@ void Player::onEvent(sf::Event evt) {
 			break; 
 		case sf::Keyboard::A:
 			m_keyDowns[1] = true;
+			m_movingRight = false; 
 			break;
 		case sf::Keyboard::S:
 			m_keyDowns[2] = true;
 			break;
 		case sf::Keyboard::D:
 			m_keyDowns[3] = true;
+			m_movingRight = true;
 			break;
 		default:
 			break;
@@ -103,4 +106,9 @@ sf::Vector2f Player::getPosition() const {
 
 void Player::setPosition(sf::Vector2f val) {
 	m_pos = val;
+}
+
+bool Player::getDirection()
+{
+	return m_movingRight;
 }

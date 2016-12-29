@@ -28,6 +28,7 @@
 #include "InputManager.h"
 #include "Player.h"
 #include "Terrain.h"
+#include "BulletManager.h"
 
 ////////////////////////////////////////////////////////////
 ///Entrypoint of application 
@@ -37,6 +38,7 @@ class Game : EventListener {
 private:
 	sf::RenderWindow * m_window;
 	InputManager m_inputManager;
+	BulletManager m_bulletManager;
 	
 	Player * m_player;
 	Terrain m_terrain;
