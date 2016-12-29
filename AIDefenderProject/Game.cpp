@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game (){
+Game::Game () {
 	srand(std::time(0));
 
 	m_window = new sf::RenderWindow(sf::VideoMode(800, 600, 32), "SFML First Program");
@@ -15,16 +15,23 @@ Game::Game (){
 	m_inputManager.addListener(sf::Event::KeyReleased, m_player);
 
 	m_bulletManager = BulletManager();
+
+	m_camera = Camera(m_window->getSize().x, m_window->getSize().y);
 }
 
 void Game::update(float dt) {
 	m_inputManager.processInput();
-	m_player->update(dt);
+	m_player->update(dt, m_camera);
+
 	sf::Vector2f playerPos = m_player->getPosition();
 	float temp = m_terrain.underneath(playerPos);
 	playerPos.y += temp;
 	m_player->setPosition(playerPos);
-	m_bulletManager.Update();
+
+	m_camera.update(playerPos);
+	m_terrain.update(m_camera);
+
+	m_bulletManager.update(m_camera);
 }
 
 void Game::render() {
@@ -65,11 +72,11 @@ void Game::onEvent(sf::Event evt) {
 		case sf::Keyboard::Space:
 			if (m_player->getDirection())
 			{
-				m_bulletManager.AddBullet(m_player->getPosition(), sf::Vector2f(0.1f, 0), false); //Moving Right
+				m_bulletManager.addBullet(m_player->getPosition(), sf::Vector2f(0.1f, 0), false); //Moving Right
 			}
 			else
 			{
-				m_bulletManager.AddBullet(m_player->getPosition(), sf::Vector2f(-0.1f, 0), false); //Moving Left
+				m_bulletManager.addBullet(m_player->getPosition(), sf::Vector2f(-0.1f, 0), false); //Moving Left
 			}
 			
 		default:

@@ -30,7 +30,7 @@ Bullet::~Bullet()
 {
 }
 
-void Bullet::Reset(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBullet) //Mignt not be needed if the manager has an array of "new" bullets that are deleted
+void Bullet::reset(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBullet) //Mignt not be needed if the manager has an array of "new" bullets that are deleted
 {
 	m_pos = pos;
 	m_vel = vel;
@@ -58,10 +58,10 @@ void Bullet::render(sf::RenderWindow * window)
 	window->draw(m_sprite);
 }
 
-void Bullet::Update()
+void Bullet::update(Camera camera)
 {
 	m_pos += m_vel;
-	m_sprite.setPosition(m_pos);
+	m_sprite.setPosition(camera + m_pos);
 	if (m_clock.getElapsedTime() - m_startTime > lifeSpan
 		&& m_alive == true) // If the bullet has exeeded the lifespan
 	{

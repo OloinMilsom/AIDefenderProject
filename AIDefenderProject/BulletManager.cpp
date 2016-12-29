@@ -11,7 +11,7 @@ BulletManager::~BulletManager()
 {
 }
 
-void BulletManager::AddBullet(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBullet)
+void BulletManager::addBullet(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBullet)
 {
 	bool needNewBullet = true; //Temorary bool to check if a new bullet is needed
 
@@ -19,7 +19,7 @@ void BulletManager::AddBullet(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBu
 	{
 		if (!m_bullets.at(i).getAlive())
 		{
-			m_bullets.at(i).Reset(pos, vel, isEnemyBullet);
+			m_bullets.at(i).reset(pos, vel, isEnemyBullet);
 			needNewBullet = false; //Don't need a new bullet
 			break; //loop is no longer needed
 		}
@@ -32,13 +32,13 @@ void BulletManager::AddBullet(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBu
 	
 }
 
-void BulletManager::Update()
+void BulletManager::update(Camera camera)
 {
 	for (int i = 0; i < m_bullets.size(); i++) //for the size of the bullet array
 	{
 		if (m_bullets.at(i).getAlive()) //Only render if the bullet is alive
 		{
-			m_bullets.at(i).Update(); //Update the bullet
+			m_bullets.at(i).update(camera); //Update the bullet
 		}
 	}
 }
@@ -51,7 +51,7 @@ void BulletManager::render(sf::RenderWindow * window)
 	}
 }
 
-bool BulletManager::CheckCollision(int index, sf::RectangleShape rect) 
+bool BulletManager::checkCollision(int index, sf::RectangleShape rect) 
 {
 	return rect.getGlobalBounds().contains(m_bullets.at(index).getPos()); //Takes the rect from the player or enemy's rectangle shape and checks if it contains the bullet
 }

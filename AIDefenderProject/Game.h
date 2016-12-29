@@ -29,6 +29,7 @@
 #include "Player.h"
 #include "Terrain.h"
 #include "BulletManager.h"
+#include "Camera.h"
 
 ////////////////////////////////////////////////////////////
 ///Entrypoint of application 
@@ -39,10 +40,11 @@ private:
 	sf::RenderWindow * m_window;
 	InputManager m_inputManager;
 	BulletManager m_bulletManager;
-	
+
 	Player * m_player;
 	Terrain m_terrain;
 	
+	Camera m_camera;
 	sf::Clock m_clock;
 	float m_lastFrameTime;
 

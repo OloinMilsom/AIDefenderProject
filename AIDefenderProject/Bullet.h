@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h" 
-
+#include "Camera.h"
 
 class Bullet
 {
@@ -21,9 +21,9 @@ public:
 	Bullet(sf::Vector2f, sf::Vector2f, bool);
 	~Bullet();
 
-	void Update();
+	void update(Camera camera);
 	void render(sf::RenderWindow * window);
-	void Reset(sf::Vector2f, sf::Vector2f, bool);
+	void reset(sf::Vector2f, sf::Vector2f, bool);
 
 	bool getAlive();
 	bool getIsEnemyBullet();

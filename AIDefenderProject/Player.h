@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "EventListener.h"
+#include "Camera.h"
 
 class Player : public EventListener {
 private:
@@ -16,7 +17,7 @@ private:
 	float m_xVel;
 public:
 	Player();
-	void update(float dt);
+	void update(float dt, Camera camera);
 	void render(sf::RenderWindow * window);
 	void onEvent(sf::Event evt);
 	sf::Vector2f getPosition() const;
