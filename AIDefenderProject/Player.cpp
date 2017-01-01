@@ -9,7 +9,7 @@ Player::Player() : m_xVel(0) {
 	m_movingRight = true;
 }
 
-void Player::update(float dt, Camera camera) {
+void Player::update(float dt) {
 	if (m_keyDowns[0]) { // W key held
 		m_pos.y -= Y_SPEED * dt;
 	}
@@ -47,11 +47,13 @@ void Player::update(float dt, Camera camera) {
 	}
 
 	m_pos.x += m_xVel * dt;
-	m_sprite.setPosition(camera + m_pos);
+	m_sprite.setPosition(m_pos);
 }
 
-void Player::render(sf::RenderWindow * window) {
-	window->draw(m_sprite);
+void Player::render(sf::RenderWindow * window, Camera camera) {
+	sf::RectangleShape temp = m_sprite;
+	temp.setPosition(camera + temp.getPosition());
+	window->draw(temp);
 }
 
 void Player::onEvent(sf::Event evt) {

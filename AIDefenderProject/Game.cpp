@@ -21,7 +21,7 @@ Game::Game () {
 
 void Game::update(float dt) {
 	m_inputManager.processInput();
-	m_player->update(dt, m_camera);
+	m_player->update(dt);
 
 	sf::Vector2f playerPos = m_player->getPosition();
 	float temp = m_terrain.underneath(playerPos);
@@ -29,18 +29,18 @@ void Game::update(float dt) {
 	m_player->setPosition(playerPos);
 
 	m_camera.update(playerPos);
-	m_terrain.update(m_camera);
+	m_terrain.update();
 
-	m_bulletManager.update(m_camera);
+	m_bulletManager.update();
 }
 
 void Game::render() {
 	//prepare frame
 	m_window->clear();
 
-	m_player->render(m_window);
-	m_terrain.render(m_window);
-	m_bulletManager.render(m_window);
+	m_player->render(m_window, m_camera);
+	m_terrain.render(m_window, m_camera);
+	m_bulletManager.render(m_window, m_camera);
 
 	// Finally, display rendered frame on screen 
 	m_window->display();

@@ -32,22 +32,22 @@ void BulletManager::addBullet(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBu
 	
 }
 
-void BulletManager::update(Camera camera)
+void BulletManager::update()
 {
 	for (int i = 0; i < m_bullets.size(); i++) //for the size of the bullet array
 	{
 		if (m_bullets.at(i).getAlive()) //Only render if the bullet is alive
 		{
-			m_bullets.at(i).update(camera); //Update the bullet
+			m_bullets.at(i).update(); //Update the bullet
 		}
 	}
 }
 
-void BulletManager::render(sf::RenderWindow * window)
+void BulletManager::render(sf::RenderWindow * window, Camera camera)
 {
 	for (int i = 0; i < m_bullets.size(); i++)
 	{
-		m_bullets.at(i).render(window);
+		m_bullets.at(i).render(window, camera);
 	}
 }
 

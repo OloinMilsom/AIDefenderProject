@@ -6,8 +6,7 @@ Camera::Camera(int width, int height)
 }
 
 void Camera::update(sf::Vector2f centre) {
-	m_transform.x = m_oldCentre.x - centre.x;
-	m_oldCentre = centre;
+	m_transform.x = m_screenCentre.x - centre.x;
 }
 
 sf::Vector2f Camera::operator+(sf::Vector2f vec) {

@@ -1,7 +1,8 @@
 #include "Terrain.h"
 
 
-Terrain::Terrain(int width, int height, int deviation) {
+Terrain::Terrain(int width, int height, int deviation) : m_width(width) {
+	m_height = std::numeric_limits<int>::max();
 	int noOfPoints = width / 10;
 	int originalHeight = height;
 	std::default_random_engine rnd(std::time(0));
@@ -9,41 +10,60 @@ Terrain::Terrain(int width, int height, int deviation) {
 		std::normal_distribution<float> normal(0, deviation);
 
 		for (int i = 0; i < noOfPoints; i++) {
+			if (height < m_height) {
+				m_height = height;
+			}
 			m_vertices.push_back(sf::Vertex(sf::Vector2f(i * 10, height), sf::Color(204, 119, 34)));
 			height += normal(rnd);
 			height += (originalHeight - height) / deviation;
 		}
+		m_vertices.push_back(sf::Vertex(sf::Vector2f(width, originalHeight), sf::Color(204, 119, 34)));
 	}
 }
 
-void Terrain::update(Camera camera) {
-	for (int i = 0; i < m_vertices.size(); i++) {
+void Terrain::update() {
+	/*for (int i = 0; i < m_vertices.size(); i++) {
 		m_vertices[i].position = camera + m_vertices[i].position;
 	}
 	auto comp = [](sf::Vertex v1, sf::Vertex v2) {
 		return v1.position.x < v2.position.x;
 	};
-	std::sort(m_vertices.begin(), m_vertices.end(), comp);
+	std::sort(m_vertices.begin(), m_vertices.end(), comp);*/
 }
 
-void Terrain::render(sf::RenderWindow * window) {	
-	sf::VertexArray temp = sf::VertexArray(sf::LineStrip, m_vertices.size());
-	for (int i = 0; i < m_vertices.size(); i++) {
-		temp[i] = m_vertices[i];
+void Terrain::render(sf::RenderWindow * window, Camera camera) {
+	sf::VertexArray temp = sf::VertexArray(sf::Lines, m_vertices.size() * 2);
+	for (int i = 0; i < m_vertices.size() - 1; i++) {
+		temp[2 * i] = m_vertices[i];
+		temp[2 * i].position = camera + temp[2 * i].position;
+		temp[2 * i + 1] = m_vertices[i+1];
+		temp[2 * i + 1].position = camera + temp[2 * i + 1].position;
+		if (temp[2 * i].position.x > temp[2 * i + 1].position.x) {
+			temp[2 * i + 1].position.x += m_width;
+		}
 	}
 	window->draw(temp);
 }
 
 float Terrain::underneath(sf::Vector2f pos) {
-	if (!m_vertices.empty()) {
-		for (int i = 0; i < m_vertices.size() - 1; i++) {
-			if (pos.x < m_vertices[i + 1].position.x) {
-				// lerp
-				float y = m_vertices[i].position.y + (pos.x - m_vertices[i].position.x) * ((m_vertices[i + 1].position.y - m_vertices[i].position.y) / (m_vertices[i + 1].position.x - m_vertices[i].position.x));
-				if (y < pos.y) {
-					return y - pos.y;
+	if (pos.y > m_height) {
+		while (pos.x > m_width) {
+			pos.x -= m_width;
+		}
+		while (pos.x < 0) {
+			pos.x += m_width;
+		}
+
+		if (!m_vertices.empty()) {
+			for (int i = 0; i < m_vertices.size() - 1; i++) {
+				if (pos.x < m_vertices[i + 1].position.x) {
+					// lerp
+					float y = m_vertices[i].position.y + (pos.x - m_vertices[i].position.x) * ((m_vertices[i + 1].position.y - m_vertices[i].position.y) / (m_vertices[i + 1].position.x - m_vertices[i].position.x));
+					if (y < pos.y) {
+						return y - pos.y;
+					}
+					else return 0;
 				}
-				else return 0;
 			}
 		}
 	}

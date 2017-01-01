@@ -10,9 +10,9 @@ public:
 	~BulletManager();
 
 	void addBullet(sf::Vector2f, sf::Vector2f, bool);
-	void update(Camera camera);
+	void update();
 	bool checkCollision(int, sf::RectangleShape);
-	void render(sf::RenderWindow * window);
+	void render(sf::RenderWindow * window, Camera camera);
 
 	bool getIsEnemyBullet(int index);
 };

@@ -53,15 +53,17 @@ void Bullet::reset(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBullet) //Mig
 	}
 }
 
-void Bullet::render(sf::RenderWindow * window)
+void Bullet::render(sf::RenderWindow * window, Camera camera)
 {
-	window->draw(m_sprite);
+	sf::CircleShape temp = m_sprite;
+	temp.setPosition(camera + temp.getPosition());
+	window->draw(temp);
 }
 
-void Bullet::update(Camera camera)
+void Bullet::update()
 {
 	m_pos += m_vel;
-	m_sprite.setPosition(camera + m_pos);
+	m_sprite.setPosition(m_pos);
 	if (m_clock.getElapsedTime() - m_startTime > lifeSpan
 		&& m_alive == true) // If the bullet has exeeded the lifespan
 	{
