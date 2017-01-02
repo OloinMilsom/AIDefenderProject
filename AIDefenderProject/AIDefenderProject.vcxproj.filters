@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Aliens">
+      <UniqueIdentifier>{b7592cef-79ee-4875-bd96-0583f5650db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Aliens">
+      <UniqueIdentifier>{150f60e7-0c6b-4e91-8e7e-b5fccdba86ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -38,6 +44,24 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Astronaut.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Alien.cpp">
+      <Filter>Source Files\Aliens</Filter>
+    </ClCompile>
+    <ClCompile Include="Abductor.cpp">
+      <Filter>Source Files\Aliens</Filter>
+    </ClCompile>
+    <ClCompile Include="AlienNest.cpp">
+      <Filter>Source Files\Aliens</Filter>
+    </ClCompile>
+    <ClCompile Include="Mutant.cpp">
+      <Filter>Source Files\Aliens</Filter>
+    </ClCompile>
+    <ClCompile Include="AlienManager.cpp">
+      <Filter>Source Files\Aliens</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +91,24 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Astronaut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Alien.h">
+      <Filter>Header Files\Aliens</Filter>
+    </ClInclude>
+    <ClInclude Include="AlienNest.h">
+      <Filter>Header Files\Aliens</Filter>
+    </ClInclude>
+    <ClInclude Include="Abductor.h">
+      <Filter>Header Files\Aliens</Filter>
+    </ClInclude>
+    <ClInclude Include="Mutant.h">
+      <Filter>Header Files\Aliens</Filter>
+    </ClInclude>
+    <ClInclude Include="AlienManager.h">
+      <Filter>Header Files\Aliens</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
