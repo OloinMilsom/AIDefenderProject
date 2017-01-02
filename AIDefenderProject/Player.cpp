@@ -50,9 +50,9 @@ void Player::update(float dt) {
 	m_sprite.setPosition(m_pos);
 }
 
-void Player::render(sf::RenderWindow * window, Camera camera) {
+void Player::render(sf::RenderWindow * window, Camera * camera) {
 	sf::RectangleShape temp = m_sprite;
-	temp.setPosition(camera + temp.getPosition());
+	temp.setPosition((*camera) + temp.getPosition());
 	window->draw(temp);
 }
 

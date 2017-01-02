@@ -53,10 +53,10 @@ void Bullet::reset(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBullet) //Mig
 	}
 }
 
-void Bullet::render(sf::RenderWindow * window, Camera camera)
+void Bullet::render(sf::RenderWindow * window, Camera * camera)
 {
 	sf::CircleShape temp = m_sprite;
-	temp.setPosition(camera + temp.getPosition());
+	temp.setPosition((*camera) + temp.getPosition());
 	window->draw(temp);
 }
 

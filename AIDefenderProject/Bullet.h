@@ -22,7 +22,7 @@ public:
 	~Bullet();
 
 	void update();
-	void render(sf::RenderWindow * window, Camera camera);
+	void render(sf::RenderWindow * window, Camera * camera);
 	void reset(sf::Vector2f, sf::Vector2f, bool);
 
 	bool getAlive();

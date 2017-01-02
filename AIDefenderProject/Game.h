@@ -30,10 +30,8 @@
 #include "Terrain.h"
 #include "BulletManager.h"
 #include "Camera.h"
-
-////////////////////////////////////////////////////////////
-///Entrypoint of application 
-//////////////////////////////////////////////////////////// 
+#include "Astronaut.h"
+#include "AlienManager.h"
 
 class Game : EventListener {
 private:
@@ -43,6 +41,8 @@ private:
 
 	Player * m_player;
 	Terrain m_terrain;
+	std::vector<Astronaut> m_astronauts;
+	AlienManager * m_alienManager;
 	
 	Camera m_camera;
 	sf::Clock m_clock;

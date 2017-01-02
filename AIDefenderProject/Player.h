@@ -18,7 +18,7 @@ private:
 public:
 	Player();
 	void update(float dt);
-	void render(sf::RenderWindow * window, Camera camera);
+	void render(sf::RenderWindow * window, Camera * camera);
 	void onEvent(sf::Event evt);
 	sf::Vector2f getPosition() const;
 	void setPosition(sf::Vector2f);

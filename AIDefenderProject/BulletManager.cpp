@@ -43,7 +43,7 @@ void BulletManager::update()
 	}
 }
 
-void BulletManager::render(sf::RenderWindow * window, Camera camera)
+void BulletManager::render(sf::RenderWindow * window, Camera * camera)
 {
 	for (int i = 0; i < m_bullets.size(); i++)
 	{

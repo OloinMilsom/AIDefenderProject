@@ -31,13 +31,13 @@ void Terrain::update() {
 	std::sort(m_vertices.begin(), m_vertices.end(), comp);*/
 }
 
-void Terrain::render(sf::RenderWindow * window, Camera camera) {
+void Terrain::render(sf::RenderWindow * window, Camera * camera) {
 	sf::VertexArray temp = sf::VertexArray(sf::Lines, m_vertices.size() * 2);
 	for (int i = 0; i < m_vertices.size() - 1; i++) {
 		temp[2 * i] = m_vertices[i];
-		temp[2 * i].position = camera + temp[2 * i].position;
+		temp[2 * i].position = (*camera) + temp[2 * i].position;
 		temp[2 * i + 1] = m_vertices[i+1];
-		temp[2 * i + 1].position = camera + temp[2 * i + 1].position;
+		temp[2 * i + 1].position = (*camera) + temp[2 * i + 1].position;
 		if (temp[2 * i].position.x > temp[2 * i + 1].position.x) {
 			temp[2 * i + 1].position.x += m_width;
 		}
@@ -45,27 +45,31 @@ void Terrain::render(sf::RenderWindow * window, Camera camera) {
 	window->draw(temp);
 }
 
-float Terrain::underneath(sf::Vector2f pos) {
+float Terrain::getMTV(sf::Vector2f pos) {
 	if (pos.y > m_height) {
-		while (pos.x > m_width) {
-			pos.x -= m_width;
+		float y = getHeightAt(pos.x);
+		if (y < pos.y) {
+			return y - pos.y;
 		}
-		while (pos.x < 0) {
-			pos.x += m_width;
-		}
+		else return 0;
+	}
+	return 0;
+}
 
-		if (!m_vertices.empty()) {
-			for (int i = 0; i < m_vertices.size() - 1; i++) {
-				if (pos.x < m_vertices[i + 1].position.x) {
-					// lerp
-					float y = m_vertices[i].position.y + (pos.x - m_vertices[i].position.x) * ((m_vertices[i + 1].position.y - m_vertices[i].position.y) / (m_vertices[i + 1].position.x - m_vertices[i].position.x));
-					if (y < pos.y) {
-						return y - pos.y;
-					}
-					else return 0;
-				}
+float Terrain::getHeightAt(float x)
+{
+	if (!m_vertices.empty()) {
+		while (x > m_width) {
+			x -= m_width;
+		}
+		while (x < 0) {
+			x += m_width;
+		}
+		for (int i = 0; i < m_vertices.size() - 1; i++) {
+			if (x < m_vertices[i + 1].position.x) {
+				// lerp
+				return m_vertices[i].position.y + (x - m_vertices[i].position.x) * ((m_vertices[i + 1].position.y - m_vertices[i].position.y) / (m_vertices[i + 1].position.x - m_vertices[i].position.x));
 			}
 		}
 	}
-	return 0;
 }
