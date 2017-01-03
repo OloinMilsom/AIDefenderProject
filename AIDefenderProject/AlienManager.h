@@ -14,9 +14,11 @@ private:
 	std::vector<Alien *> m_aliens;
 	const std::vector<Astronaut> * m_astronauts;
 	const Player * m_player;
+	const Terrain * m_terrain;
+	const Camera * m_camera;
 
 public:
-	AlienManager(Player * player, std::vector<Astronaut> * astronauts);
+	AlienManager(Player * player, std::vector<Astronaut> * astronauts, Terrain * terrain, Camera * camera);
 	~AlienManager();
 
 	std::vector<Alien *> * getAll();
@@ -26,6 +28,8 @@ public:
 
 	const std::vector<Astronaut> * getAstronauts();
 	const Player * getPlayer();
+	const Terrain * getTerrain();
+	const Camera * getCamera();
 
 	void addNest(sf::Vector2f position);
 	void addAbductor(sf::Vector2f position);

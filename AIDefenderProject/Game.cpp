@@ -22,7 +22,7 @@ Game::Game () {
 		m_astronauts.push_back(Astronaut(rand() % (800 * 9)));
 	}
 
-	m_alienManager = new AlienManager(m_player, &m_astronauts);
+	m_alienManager = new AlienManager(m_player, &m_astronauts, &m_terrain, &m_camera);
 
 	for (int i = 0; i < 20; i++) {
 		m_alienManager->addNest(sf::Vector2f(rand() % (800 * 9), rand() % 600));
