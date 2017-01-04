@@ -45,7 +45,7 @@ void Terrain::render(sf::RenderWindow * window, Camera * camera) {
 	window->draw(temp);
 }
 
-float Terrain::getMTV(sf::Vector2f pos) {
+float Terrain::getMTV(sf::Vector2f pos) const {
 	if (pos.y > m_height) {
 		float y = getHeightAt(pos.x);
 		if (y < pos.y) {
@@ -56,8 +56,7 @@ float Terrain::getMTV(sf::Vector2f pos) {
 	return 0;
 }
 
-float Terrain::getHeightAt(float x)
-{
+float Terrain::getHeightAt(float x) const {
 	if (!m_vertices.empty()) {
 		while (x > m_width) {
 			x -= m_width;

@@ -9,7 +9,7 @@ void Camera::update(sf::Vector2f centre) {
 	m_transform.x = m_screenCentre.x - centre.x;
 }
 
-sf::Vector2f Camera::operator+(sf::Vector2f vec) {
+sf::Vector2f Camera::operator+(sf::Vector2f vec) const {
 	sf::Vector2f temp = m_transform + vec;
 	while (temp.x > m_worldSize.x) {
 		temp.x -= m_worldSize.x;
