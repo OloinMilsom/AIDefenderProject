@@ -19,3 +19,5 @@ void Alien::render(sf::RenderWindow * window, Camera * camera) {
 	window->draw(temp);
 	window->draw(velAccel);
 }
+
+sf::Vector2f Alien::getPos(){ return m_position;}

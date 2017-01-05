@@ -20,4 +20,5 @@ public:
 	Alien(sf::Vector2f pos, float speed, float acceleration);
 	virtual void update(float dt, AlienManager * data) = 0;
 	void render(sf::RenderWindow * window, Camera * camera);
+	sf::Vector2f getPos();
 };

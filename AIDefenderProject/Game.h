@@ -37,7 +37,7 @@ class Game : EventListener {
 private:
 	sf::RenderWindow * m_window;
 	InputManager m_inputManager;
-	BulletManager m_bulletManager;
+	//BulletManager m_bulletManager;
 
 	Player * m_player;
 	Terrain m_terrain;

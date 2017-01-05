@@ -7,6 +7,7 @@ Bullet::Bullet(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBullet)
 	m_pos = pos;
 	m_vel = vel;
 
+
 	m_alive = true;
 
 	m_isEnemyBullet = isEnemyBullet;
@@ -55,9 +56,12 @@ void Bullet::reset(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBullet) //Mig
 
 void Bullet::render(sf::RenderWindow * window, Camera * camera)
 {
-	sf::CircleShape temp = m_sprite;
-	temp.setPosition((*camera) + temp.getPosition());
-	window->draw(temp);
+	if (m_alive)
+	{
+		sf::CircleShape temp = m_sprite;
+		temp.setPosition((*camera) + temp.getPosition());
+		window->draw(temp);
+	}
 }
 
 void Bullet::update()
@@ -69,6 +73,13 @@ void Bullet::update()
 	{
 		m_alive = false; //The bullet is no longet alive
 	}
+}
+
+sf::Vector2f Bullet::Normalize(sf::Vector2f vec)
+{
+	float length = sqrt((vec.x * vec.x) + (vec.y * vec.y));
+
+	return sf::Vector2f(vec.x / length, vec.y / length);
 }
 
 bool Bullet::getAlive() { return m_alive; }

@@ -4,11 +4,12 @@
 
 class Bullet
 {
-private:
+protected:
 	sf::Time lifeSpan = sf::seconds(4.0f); //The lifespan of a bullet
 
 	sf::Vector2f m_pos; //Position of bullet
 	sf::Vector2f m_vel; //Velocity of bullet
+
 
 	sf::Clock m_clock; //Clock for getting current time
 	sf::Time m_startTime; //Time that the bullet is created or reset
@@ -22,6 +23,7 @@ public:
 	~Bullet();
 
 	void update();
+	sf::Vector2f Normalize(sf::Vector2f);
 	void render(sf::RenderWindow * window, Camera * camera);
 	void reset(sf::Vector2f, sf::Vector2f, bool);
 

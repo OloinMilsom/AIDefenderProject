@@ -1,17 +1,17 @@
 #include "BulletManager.h"
 
+BulletManager *BulletManager::m_instance = 0;
 
-
-BulletManager::BulletManager()
-{
-}
+//BulletManager::BulletManager()
+//{
+//}
 
 
 BulletManager::~BulletManager()
 {
 }
 
-void BulletManager::addBullet(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBullet)
+void BulletManager::addBullet(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBullet, bool isTracking)
 {
 	bool needNewBullet = true; //Temorary bool to check if a new bullet is needed
 
@@ -27,7 +27,15 @@ void BulletManager::addBullet(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBu
 
 	if (needNewBullet)
 	{
-		m_bullets.push_back(Bullet(pos, vel, isEnemyBullet)); //Adds a bullet to the vector
+		if (isTracking)
+		{
+			m_bullets.push_back(TrackingBullet(pos, vel, isEnemyBullet)); //Adds a bullet to the vector
+		}
+		else
+		{
+			m_bullets.push_back(Bullet(pos, vel, isEnemyBullet)); //Adds a bullet to the vector
+		}
+		
 	}
 	
 }
