@@ -1,6 +1,6 @@
 #include "Alien.h"
 
-Alien::Alien(sf::Vector2f pos, float speed, float acceleration) : m_position(pos), MAX_SPEED(speed), MAX_ACCELERATION(acceleration) {
+Alien::Alien(sf::Vector2f pos, float speed, float acceleration) : m_position(pos), MAX_SPEED(speed), MAX_ACCELERATION(acceleration), m_alive(true) {
 }
 
 void Alien::render(sf::RenderWindow * window, Camera * camera) {
@@ -18,6 +18,10 @@ void Alien::render(sf::RenderWindow * window, Camera * camera) {
 	velAccel[3].color = sf::Color::Green;
 	window->draw(temp);
 	window->draw(velAccel);
+}
+
+AlienType Alien::getType() {
+	return m_type;
 }
 
 sf::Vector2f Alien::getPos(){ return m_position;}
