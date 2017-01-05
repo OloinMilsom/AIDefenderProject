@@ -23,7 +23,7 @@ AlienManager::~AlienManager() {
 
 #pragma region ContainerOperators
 
-const std::deque<Alien*> AlienManager::getAll() {
+const std::deque<Alien*> AlienManager::getAll() const {
 	return m_aliens;
 }
 

@@ -8,6 +8,7 @@
 #include "Player.h"
 
 class Alien;
+class Astronaut;
 enum AlienType;
 
 class AlienManager {
@@ -36,7 +37,7 @@ public:
 	~AlienManager();
 
 	// get all the aliens
-	const std::deque<Alien *> getAll();
+	const std::deque<Alien *> getAll() const;
 
 	// iterators to access different alien types;
 	std::deque<Alien *>::iterator nestBegin();

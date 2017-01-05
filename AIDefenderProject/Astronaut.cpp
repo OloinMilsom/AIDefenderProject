@@ -1,6 +1,6 @@
 #include "Astronaut.h"
 
-Astronaut::Astronaut(float x, AlienManager * alienManager) : m_position(sf::Vector2f(x, 0)) {
+Astronaut::Astronaut(float x, AlienManager * alienManager) : m_position(sf::Vector2f(x, 0)), m_alienManager(alienManager) {
 	m_sprite = sf::RectangleShape(sf::Vector2f(10, 10)); 
 	int rnd = rand() % 3;
 	if (rnd == 0) {
@@ -12,8 +12,6 @@ Astronaut::Astronaut(float x, AlienManager * alienManager) : m_position(sf::Vect
 	else if (rnd == 2) {
 		m_vel = -X_SPEED;
 	}
-
-	m_alienManager = alienManager;
 }
 
 void Astronaut::update(float dt, Terrain * terrain) {
@@ -42,7 +40,7 @@ void Astronaut::render(sf::RenderWindow * window, Camera * camera) {
 
 void Astronaut::avoid()
 {
-	if (m_alienManager->getAll()->at(avoidTarget)->getPos().x > m_position.x) {
+	if (m_alienManager->getAll()[avoidTarget]->getPos().x > m_position.x) {
 		m_vel = -X_SPEED;
 	}
 	else {
@@ -61,9 +59,10 @@ void Astronaut::wander()
 
 bool Astronaut::isAlienNear()
 {
-	for (int i = 0; i < m_alienManager->getAll()->size; i++)
+	auto aliens = m_alienManager->getAll();
+	for (int i = 0; i < aliens.size(); i++)
 	{
-		sf::Vector2f length = m_alienManager->getAll()->at(i)->getPos() - m_position;
+		sf::Vector2f length = aliens[i]->getPos() - m_position;
 		length.x *= length.x;
 		length.y *= length.y;
 		if (length.x + length.y > 50)
