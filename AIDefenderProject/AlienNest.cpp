@@ -1,18 +1,29 @@
 #include "AlienNest.h"
 
 AlienNest::AlienNest(sf::Vector2f position, float speed, float acceleration) : Alien(position, speed, acceleration) {
+	m_type = AlienType::nest;
+
 	m_angle = acos(-1) * 2 * static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 	m_velocity = sf::Vector2f(cos(m_angle), sin(m_angle)) * 0.0f;
 	m_acceleration = sf::Vector2f(MAX_ACCELERATION, 0);
 
 	m_sprite.setSize(sf::Vector2f(20, 10));
+	m_sprite.setFillColor(sf::Color::Magenta);
+
+	resetSpawnTimer();
 }
 
 void AlienNest::update(float dt, AlienManager * data) {
 	wander();
 	avoidBounds(data->getTerrain());
 	avoidPlayer(data->getPlayer(), data->getCamera());
-	data->addAbductor(m_position);
+
+	m_spawnTimer -= dt;
+	if (m_spawnTimer < 0) {
+		data->addAbductor(m_position);
+		data->addMutant(m_position);
+		resetSpawnTimer();
+	}
 
 	m_acceleration *= MAX_ACCELERATION / sqrt(m_acceleration.x * m_acceleration.x + m_acceleration.y * m_acceleration.y);
 
@@ -66,4 +77,8 @@ void AlienNest::avoidPlayer(const Player * player, const Camera * camera) {
 	float lengthSquared = d.x * d.x + d.y * d.y;
 	d /= lengthSquared;
 	m_acceleration += d * 750.0f;
+}
+
+void AlienNest::resetSpawnTimer() {
+	m_spawnTimer = rand() % 3 + 3;
 }
