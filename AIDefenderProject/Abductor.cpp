@@ -1,7 +1,7 @@
 #include "Abductor.h"
 
 
-Abductor::Abductor(sf::Vector2f position, float speed, float acceleration) : Alien(position, speed, acceleration) {
+Abductor::Abductor(sf::Vector2f position, float speed, float acceleration) : Alien(position, speed, acceleration), m_inFlock(false){
 	m_type = AlienType::abductor;
 
 	m_angle = acos(-1) * 2 * static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
@@ -26,11 +26,11 @@ void Abductor::flock(AlienManager * data) {
 	sf::Vector2f averagePos;
 
 	for (auto iter = data->abductorBegin(); iter != data->abductorEnd(); iter++) {
-		sf::Vector2f curPos = (*iter)->getPos();
-		sf::Vector2f distance = curPos - m_position;
+		sf::Vector2f curPos = (*data->getCamera()) + (*iter)->getPos();
+		sf::Vector2f distance = curPos - ((*data->getCamera()) + m_position);
 		if (distance.x * distance.x + distance.y * distance.y < FLOCK_DISTANCE * FLOCK_DISTANCE) {
 			averageAccel += (*iter)->getAccel();
-			averagePos += (*iter)->getPos();
+			averagePos += (*data->getCamera()) + (*iter)->getPos();
 			neighbours.push_back(static_cast<Abductor *>(*iter));
 		}
 	}
