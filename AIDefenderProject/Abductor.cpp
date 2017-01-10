@@ -1,7 +1,8 @@
 #include "Abductor.h"
 
+std::vector<int> Abductor::m_chasedIndices;
 
-Abductor::Abductor(sf::Vector2f position, float speed, float acceleration) : Alien(position, speed, acceleration), m_inFlock(false){
+Abductor::Abductor(sf::Vector2f position, float speed, float acceleration) : Alien(position, speed, acceleration), m_inFlock(false), m_chasing(false) {
 	m_type = AlienType::abductor;
 
 	m_angle = acos(-1) * 2 * static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
@@ -40,6 +41,7 @@ void Abductor::flock(AlienManager * data) {
 
 	// alignment, cohesion and seperation
 	if (neighbours.size() > 1) {
+		m_inFlock = true;
 		for (int i = 0; i < neighbours.size(); i++) {
 			neighbours[i]->combineAcceleration(averageAccel * ALIGNMENT);
 
@@ -59,9 +61,38 @@ void Abductor::flock(AlienManager * data) {
 			}
 		}
 	}
+	else {
+		m_inFlock = false;
+	}
 }
 
 void Abductor::combineAcceleration(sf::Vector2f other) {
 	m_acceleration += other;
 	m_acceleration *= MAX_ACCELERATION / sqrt(m_acceleration.x * m_acceleration.x + m_acceleration.y * m_acceleration.y);
+}
+
+void Abductor::chaseAstronaut(AlienManager * data) {
+	auto astronauts = data->getAstronauts();
+	if (!m_chasing) {
+		bool foundNewTarget;
+		int closestIndex;
+		float closestDistSqr = std::numeric_limits<float>::max();
+		for (int i = 0; i < astronauts->size(); i++) {
+			sf::Vector2f d = astronauts->at(i).getPos() - m_position;
+			float distSqr = d.x * d.x + d.y * d.y;
+			if (distSqr > CHASE_DISTANCE * CHASE_DISTANCE) {
+				if (closestDistSqr > distSqr) {
+					closestDistSqr = distSqr;
+					closestIndex = i;
+					foundNewTarget = true; 
+				}
+			}
+		}
+		if (foundNewTarget) {
+			if (std::find(m_chasedIndices.begin(), m_chasedIndices.end(), closestIndex) != m_chasedIndices.end()) {
+				m_chasedIndices.push_back(closestIndex);
+				m_chaseIndex = closestIndex;
+			}
+		}
+	}
 }
