@@ -55,7 +55,7 @@ std::deque<Alien*>::iterator AlienManager::mutantEnd() {
 
 #pragma region GameDataAccessors
 
-const std::vector<Astronaut> * AlienManager::getAstronauts() {
+std::vector<Astronaut> * AlienManager::getAstronauts() {
 	return m_astronauts;
 }
 
@@ -79,12 +79,12 @@ void AlienManager::clearAdditionStage() {
 	for (int i = 0; i < m_additionStage.size(); i++) {
 		switch (m_additionStage[i].first) {
 		case AlienType::nest:
-			m_aliens.insert(nestEnd(), new AlienNest(m_additionStage[i].second, 170, 150));
+			m_aliens.insert(nestEnd(), new AlienNest(m_additionStage[i].second, 170, 250));
 			m_nestCount++;
 			break;
 		case AlienType::abductor:
 			if (m_abductorCount < 20) {
-				m_aliens.insert(abductorEnd(), new Abductor(m_additionStage[i].second, 170, 150));
+				m_aliens.insert(abductorEnd(), new Abductor(m_additionStage[i].second, 170, 450));
 				m_abductorCount++;
 			}
 			break;

@@ -17,7 +17,7 @@ private:
 									// abductors will be in the middle and mutants will be at the end.
 									// counts will be kept so that iterators to each of these points is accessable
 	
-	const std::vector<Astronaut> * m_astronauts;// game data pointers stored here so the aliens can respond
+	std::vector<Astronaut> * m_astronauts;// game data pointers stored here so the aliens can respond
 	const Player * m_player;					// to this data in their behaviours, stored as const to ensure 
 	const Terrain * m_terrain;					// aliens do not alter this data as it is not their responsibility
 	const Camera * m_camera;
@@ -48,7 +48,7 @@ public:
 	std::deque<Alien *>::iterator mutantEnd();
 
 	// get the game data for alien behaviours
-	const std::vector<Astronaut> * getAstronauts();
+	std::vector<Astronaut> * getAstronauts();
 	const Player * getPlayer();
 	const Terrain * getTerrain();
 	const Camera * getCamera();
