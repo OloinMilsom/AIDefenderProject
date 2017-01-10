@@ -6,8 +6,6 @@ class AlienNest : public Alien {
 private:
 	float m_spawnTimer;
 
-	void wander();
-	void avoidBounds(const Terrain * terrain);
 	void avoidPlayer(const Player * player, const Camera * camera);
 	void resetSpawnTimer();
 public:

@@ -74,4 +74,8 @@ bool Astronaut::isAlienNear()
 	return false;
 }
 
+sf::Vector2f Astronaut::getPos() const {
+	return m_position;
+}
+
 
