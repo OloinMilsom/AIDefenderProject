@@ -2,7 +2,7 @@
 
 std::vector<int> Abductor::m_chasedIndices;
 
-Abductor::Abductor(sf::Vector2f position, float speed, float acceleration) : Alien(position, speed, acceleration), m_inFlock(false), m_chasing(false) {
+Abductor::Abductor(sf::Vector2f position, float speed, float acceleration) : Alien(position, speed, acceleration), m_inFlock(false), m_chasing(false), m_abducting(false) {
 	m_type = AlienType::abductor;
 
 	m_angle = acos(-1) * 2 * static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
@@ -13,9 +13,14 @@ Abductor::Abductor(sf::Vector2f position, float speed, float acceleration) : Ali
 }
 
 void Abductor::update(float dt, AlienManager * data) {
-	wander();
-	avoidBounds(data->getTerrain());
-	flock(data);
+	if (!m_chasing) {
+		flock(data);
+		wander();
+	}
+	if (!m_abducting) {
+		avoidBounds(data->getTerrain());
+	}
+	chaseAstronaut(data);
 
 	move(dt);
 }
@@ -74,13 +79,13 @@ void Abductor::combineAcceleration(sf::Vector2f other) {
 void Abductor::chaseAstronaut(AlienManager * data) {
 	auto astronauts = data->getAstronauts();
 	if (!m_chasing) {
-		bool foundNewTarget;
+		bool foundNewTarget = false;
 		int closestIndex;
 		float closestDistSqr = std::numeric_limits<float>::max();
 		for (int i = 0; i < astronauts->size(); i++) {
-			sf::Vector2f d = astronauts->at(i).getPos() - m_position;
+			sf::Vector2f d = ((*data->getCamera()) + astronauts->at(i).getPos()) - ((*data->getCamera()) + m_position);
 			float distSqr = d.x * d.x + d.y * d.y;
-			if (distSqr > CHASE_DISTANCE * CHASE_DISTANCE) {
+			if (distSqr < CHASE_DISTANCE * CHASE_DISTANCE) {
 				if (closestDistSqr > distSqr) {
 					closestDistSqr = distSqr;
 					closestIndex = i;
@@ -89,10 +94,30 @@ void Abductor::chaseAstronaut(AlienManager * data) {
 			}
 		}
 		if (foundNewTarget) {
-			if (std::find(m_chasedIndices.begin(), m_chasedIndices.end(), closestIndex) != m_chasedIndices.end()) {
+			if (std::find(m_chasedIndices.begin(), m_chasedIndices.end(), closestIndex) == m_chasedIndices.end()) {
 				m_chasedIndices.push_back(closestIndex);
 				m_chaseIndex = closestIndex;
+				m_chasing = true;
 			}
+		}
+	}
+	else {
+		if (!m_abducting) {
+			m_acceleration = ((*data->getCamera()) + astronauts->at(m_chaseIndex).getPos()) - ((*data->getCamera()) + m_position);
+			m_acceleration /= sqrt(m_acceleration.x * m_acceleration.x + m_acceleration.y * m_acceleration.y);
+
+			if ((astronauts->at(m_chaseIndex).getPos().x - m_position.x) * (astronauts->at(m_chaseIndex).getPos().x - m_position.x) +
+				(astronauts->at(m_chaseIndex).getPos().y - m_position.y) * (astronauts->at(m_chaseIndex).getPos().y - m_position.y) < ABDUCT_DISTANCE *ABDUCT_DISTANCE) {
+				m_abducting = true;
+				m_velocity = sf::Vector2f(0, -15);
+				m_acceleration = sf::Vector2f(0, 0);
+				astronauts->at(m_chaseIndex).setBeingAbducted(true);
+			}
+		}
+		else {
+			m_velocity = sf::Vector2f(0, -15);
+			m_acceleration = sf::Vector2f(0, 0);
+			astronauts->at(m_chaseIndex).setPos(m_position);
 		}
 	}
 }

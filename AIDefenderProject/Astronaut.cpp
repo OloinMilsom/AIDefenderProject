@@ -1,6 +1,6 @@
 #include "Astronaut.h"
 
-Astronaut::Astronaut(float x, AlienManager * alienManager) : m_position(sf::Vector2f(x, 0)), m_alienManager(alienManager) {
+Astronaut::Astronaut(float x, AlienManager * alienManager) : m_position(sf::Vector2f(x, 0)), m_alienManager(alienManager), m_beingAbducted(false) {
 	m_sprite = sf::RectangleShape(sf::Vector2f(10, 10)); 
 	int rnd = rand() % 3;
 	if (rnd == 0) {
@@ -15,20 +15,19 @@ Astronaut::Astronaut(float x, AlienManager * alienManager) : m_position(sf::Vect
 }
 
 void Astronaut::update(float dt, Terrain * terrain) {
-	if (isAlienNear())
-	{
-		avoid();
+	if (!m_beingAbducted) {
+		if (isAlienNear()) {
+			avoid();
+		}
+		else {
+			wander();
+		}
+
+
+		m_position.x += m_vel * dt;
+
+		m_position.y = terrain->getHeightAt(m_position.x + m_sprite.getSize().x / 2) - m_sprite.getSize().y;
 	}
-	else
-	{
-		wander();
-	}
-
-
-	m_position.x += m_vel * dt;
-
-	m_position.y = terrain->getHeightAt(m_position.x + m_sprite.getSize().x / 2) - m_sprite.getSize().y;
-
 	m_sprite.setPosition(m_position);
 }
 
@@ -76,6 +75,14 @@ bool Astronaut::isAlienNear()
 
 sf::Vector2f Astronaut::getPos() const {
 	return m_position;
+}
+
+void Astronaut::setPos(sf::Vector2f val) {
+	m_position = val;
+}
+
+void Astronaut::setBeingAbducted(bool val) {
+	m_beingAbducted = val;
 }
 
 
