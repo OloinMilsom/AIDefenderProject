@@ -15,7 +15,7 @@ Astronaut::Astronaut(float x, AlienManager * alienManager) : m_position(sf::Vect
 }
 
 void Astronaut::update(float dt, Terrain * terrain) {
-	if (!m_beingAbducted) {
+	if (!m_beingAbducted && m_alive) {
 		if (isAlienNear()) {
 			avoid();
 		}
@@ -32,9 +32,11 @@ void Astronaut::update(float dt, Terrain * terrain) {
 }
 
 void Astronaut::render(sf::RenderWindow * window, Camera * camera) {
-	sf::RectangleShape temp = m_sprite;
-	temp.setPosition((*camera) + temp.getPosition());
-	window->draw(temp);
+	if (m_alive) {
+		sf::RectangleShape temp = m_sprite;
+		temp.setPosition((*camera) + temp.getPosition());
+		window->draw(temp);
+	}
 }
 
 void Astronaut::avoid()
@@ -77,12 +79,20 @@ sf::Vector2f Astronaut::getPos() const {
 	return m_position;
 }
 
+bool Astronaut::getAlive() const {
+	return m_alive;
+}
+
 void Astronaut::setPos(sf::Vector2f val) {
 	m_position = val;
 }
 
 void Astronaut::setBeingAbducted(bool val) {
 	m_beingAbducted = val;
+}
+
+void Astronaut::setAlive(bool val) {
+	m_alive = val;
 }
 
 

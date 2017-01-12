@@ -7,9 +7,9 @@ private:
 	const float FLOCK_DISTANCE = 100;
 	const float ALIGNMENT = 100;
 	const float COHESION = 1000;
-	const float SEPARATION = 150;
+	const float SEPARATION = 450;
 	const float CHASE_DISTANCE = 150;
-	const float ABDUCT_DISTANCE = 10;
+	const float ABDUCT_DISTANCE = 20;
 
 	static std::vector<int> m_chasedIndices;
 

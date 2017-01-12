@@ -86,7 +86,7 @@ void Abductor::chaseAstronaut(AlienManager * data) {
 			sf::Vector2f d = ((*data->getCamera()) + astronauts->at(i).getPos()) - ((*data->getCamera()) + m_position);
 			float distSqr = d.x * d.x + d.y * d.y;
 			if (distSqr < CHASE_DISTANCE * CHASE_DISTANCE) {
-				if (closestDistSqr > distSqr) {
+				if (closestDistSqr > distSqr && astronauts->at(i).getAlive()) {
 					closestDistSqr = distSqr;
 					closestIndex = i;
 					foundNewTarget = true; 
@@ -107,7 +107,7 @@ void Abductor::chaseAstronaut(AlienManager * data) {
 			m_acceleration /= sqrt(m_acceleration.x * m_acceleration.x + m_acceleration.y * m_acceleration.y);
 
 			if ((astronauts->at(m_chaseIndex).getPos().x - m_position.x) * (astronauts->at(m_chaseIndex).getPos().x - m_position.x) +
-				(astronauts->at(m_chaseIndex).getPos().y - m_position.y) * (astronauts->at(m_chaseIndex).getPos().y - m_position.y) < ABDUCT_DISTANCE *ABDUCT_DISTANCE) {
+				(astronauts->at(m_chaseIndex).getPos().y - m_position.y) * (astronauts->at(m_chaseIndex).getPos().y - m_position.y) < ABDUCT_DISTANCE * ABDUCT_DISTANCE) {
 				m_abducting = true;
 				m_velocity = sf::Vector2f(0, -15);
 				m_acceleration = sf::Vector2f(0, 0);
@@ -118,6 +118,13 @@ void Abductor::chaseAstronaut(AlienManager * data) {
 			m_velocity = sf::Vector2f(0, -15);
 			m_acceleration = sf::Vector2f(0, 0);
 			astronauts->at(m_chaseIndex).setPos(m_position);
+			if (m_position.y < 0) {
+				m_chasing = false;
+				m_abducting = false;
+				data->addMutant(m_position);
+				astronauts->at(m_chaseIndex).setAlive(false);
+				std::remove(m_chasedIndices.begin(), m_chasedIndices.end(), m_chaseIndex);
+			}
 		}
 	}
 }
