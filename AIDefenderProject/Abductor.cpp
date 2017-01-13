@@ -115,7 +115,7 @@ void Abductor::chaseAstronaut(AlienManager * data) {
 			}
 		}
 		else {
-			m_velocity = sf::Vector2f(0, -15);
+			m_velocity = sf::Vector2f(0, -ABDUCT_SPEED);
 			m_acceleration = sf::Vector2f(0, 0);
 			astronauts->at(m_chaseIndex).setPos(m_position);
 			if (m_position.y < 0) {

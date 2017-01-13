@@ -20,6 +20,7 @@ void AlienNest::update(float dt, AlienManager * data) {
 	m_spawnTimer -= dt;
 	if (m_spawnTimer < 0) {
 		data->addAbductor(m_position);
+		data->addMutant(m_position);
 		resetSpawnTimer();
 	}
 

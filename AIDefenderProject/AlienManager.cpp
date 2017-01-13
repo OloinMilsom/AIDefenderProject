@@ -89,7 +89,7 @@ void AlienManager::clearAdditionStage() {
 			}
 			break;
 		case AlienType::mutant:
-			m_aliens.insert(mutantEnd(), new Mutant(m_additionStage[i].second, 170, 150));
+			m_aliens.insert(mutantEnd(), new Mutant(m_additionStage[i].second, 50, 450));
 			m_mutantCount++;
 			break;
 		}

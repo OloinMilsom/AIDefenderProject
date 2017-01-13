@@ -10,6 +10,7 @@ private:
 	const float SEPARATION = 450;
 	const float CHASE_DISTANCE = 150;
 	const float ABDUCT_DISTANCE = 20;
+	const float ABDUCT_SPEED = 50;
 
 	static std::vector<int> m_chasedIndices;
 
