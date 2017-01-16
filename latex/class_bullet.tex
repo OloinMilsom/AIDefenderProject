@@ -1,0 +1,68 @@
+\hypertarget{class_bullet}{}\section{Bullet Class Reference}
+\label{class_bullet}\index{Bullet@{Bullet}}
+Inheritance diagram for Bullet\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_bullet}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bullet_a77d3b716065155100cb36b354d946cfa}\label{class_bullet_a77d3b716065155100cb36b354d946cfa}} 
+{\bfseries Bullet} (sf\+::\+Vector2f, sf\+::\+Vector2f, bool)
+\item 
+\mbox{\Hypertarget{class_bullet_a32f4a0611fe2dd245fee955d14ca1f68}\label{class_bullet_a32f4a0611fe2dd245fee955d14ca1f68}} 
+void {\bfseries update} ()
+\item 
+\mbox{\Hypertarget{class_bullet_a76ff2859d498ae4f04185bde59139761}\label{class_bullet_a76ff2859d498ae4f04185bde59139761}} 
+sf\+::\+Vector2f {\bfseries Normalize} (sf\+::\+Vector2f)
+\item 
+\mbox{\Hypertarget{class_bullet_ae10a23ad456a1c093ff5ac284776fbaa}\label{class_bullet_ae10a23ad456a1c093ff5ac284776fbaa}} 
+void {\bfseries render} (sf\+::\+Render\+Window $\ast$window, \hyperlink{class_camera}{Camera} $\ast$camera)
+\item 
+\mbox{\Hypertarget{class_bullet_a4c8a3cbe18fadf1c5ed5f2a4322f311a}\label{class_bullet_a4c8a3cbe18fadf1c5ed5f2a4322f311a}} 
+void {\bfseries reset} (sf\+::\+Vector2f, sf\+::\+Vector2f, bool)
+\item 
+\mbox{\Hypertarget{class_bullet_a75b9dbc9c7dc5f0dda65759bc895ac10}\label{class_bullet_a75b9dbc9c7dc5f0dda65759bc895ac10}} 
+bool {\bfseries get\+Alive} ()
+\item 
+\mbox{\Hypertarget{class_bullet_a9553313fc54ced53b8f0952f519c0d8d}\label{class_bullet_a9553313fc54ced53b8f0952f519c0d8d}} 
+bool {\bfseries get\+Is\+Enemy\+Bullet} ()
+\item 
+\mbox{\Hypertarget{class_bullet_aa0163d91e28a47cd89cfdda4923bd30a}\label{class_bullet_aa0163d91e28a47cd89cfdda4923bd30a}} 
+sf\+::\+Vector2f {\bfseries get\+Pos} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bullet_ab7413a852b4a61d3afa739915f6aabee}\label{class_bullet_ab7413a852b4a61d3afa739915f6aabee}} 
+sf\+::\+Time {\bfseries life\+Span} = sf\+::seconds(4.\+0f)
+\item 
+\mbox{\Hypertarget{class_bullet_ae4fd7b85677ea372cab42e70e41cc912}\label{class_bullet_ae4fd7b85677ea372cab42e70e41cc912}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+pos}
+\item 
+\mbox{\Hypertarget{class_bullet_a0fbc2ea9fe4168f68919287ae4243775}\label{class_bullet_a0fbc2ea9fe4168f68919287ae4243775}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+vel}
+\item 
+\mbox{\Hypertarget{class_bullet_aea01c8f427c24c577bb2a481c8e42d44}\label{class_bullet_aea01c8f427c24c577bb2a481c8e42d44}} 
+sf\+::\+Clock {\bfseries m\+\_\+clock}
+\item 
+\mbox{\Hypertarget{class_bullet_a82d28a9015bb71d7ab456be754388963}\label{class_bullet_a82d28a9015bb71d7ab456be754388963}} 
+sf\+::\+Time {\bfseries m\+\_\+start\+Time}
+\item 
+\mbox{\Hypertarget{class_bullet_a7a3ba271067cbba6decf7adfa0583b07}\label{class_bullet_a7a3ba271067cbba6decf7adfa0583b07}} 
+sf\+::\+Circle\+Shape {\bfseries m\+\_\+sprite}
+\item 
+\mbox{\Hypertarget{class_bullet_a81722b39f1333ae333103844bb827f5d}\label{class_bullet_a81722b39f1333ae333103844bb827f5d}} 
+bool {\bfseries m\+\_\+alive}
+\item 
+\mbox{\Hypertarget{class_bullet_aa831ee51deecd215702614f4232b97e5}\label{class_bullet_aa831ee51deecd215702614f4232b97e5}} 
+bool {\bfseries m\+\_\+is\+Enemy\+Bullet}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+A\+I\+Defender\+Project/Bullet.\+h\item 
+A\+I\+Defender\+Project/Bullet.\+cpp\end{DoxyCompactItemize}

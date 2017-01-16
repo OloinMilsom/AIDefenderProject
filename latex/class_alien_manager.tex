@@ -1,0 +1,135 @@
+\hypertarget{class_alien_manager}{}\section{Alien\+Manager Class Reference}
+\label{class_alien_manager}\index{Alien\+Manager@{Alien\+Manager}}
+
+
+Manages \hyperlink{class_alien}{Alien} objects.  
+
+
+
+
+{\ttfamily \#include $<$Alien\+Manager.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_alien_manager_a742da1e39310d7693fa2fcbc60d7bf15}{Alien\+Manager} (\hyperlink{class_player}{Player} $\ast$player, std\+::vector$<$ \hyperlink{class_astronaut}{Astronaut} $>$ $\ast$astronauts, \hyperlink{class_terrain}{Terrain} $\ast$terrain, \hyperlink{class_camera}{Camera} $\ast$camera)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_alien_manager}{Alien\+Manager} constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_alien_manager_a593f0f436f0954d4fc1e432486b746f6}\label{class_alien_manager_a593f0f436f0954d4fc1e432486b746f6}} 
+\hyperlink{class_alien_manager_a593f0f436f0954d4fc1e432486b746f6}{$\sim$\+Alien\+Manager} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_alien_manager}{Alien\+Manager} destructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_alien_manager_a0f6713bb3452f5949da43b870ac7b746}\label{class_alien_manager_a0f6713bb3452f5949da43b870ac7b746}} 
+const std\+::deque$<$ \hyperlink{class_alien}{Alien} $\ast$ $>$ \hyperlink{class_alien_manager_a0f6713bb3452f5949da43b870ac7b746}{get\+All} () const
+\begin{DoxyCompactList}\small\item\em get the \hyperlink{class_alien}{Alien} container \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_alien_manager_a4af75ee3ee02f8e327d065d1079e37b6}\label{class_alien_manager_a4af75ee3ee02f8e327d065d1079e37b6}} 
+std\+::deque$<$ \hyperlink{class_alien}{Alien} $\ast$ $>$\+::iterator \hyperlink{class_alien_manager_a4af75ee3ee02f8e327d065d1079e37b6}{nest\+Begin} ()
+\begin{DoxyCompactList}\small\item\em get the start iterator for \hyperlink{class_alien_nest}{Alien\+Nest} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_alien_manager_a98744d687508fa936af8fb07189fd599}\label{class_alien_manager_a98744d687508fa936af8fb07189fd599}} 
+std\+::deque$<$ \hyperlink{class_alien}{Alien} $\ast$ $>$\+::iterator \hyperlink{class_alien_manager_a98744d687508fa936af8fb07189fd599}{nest\+End} ()
+\begin{DoxyCompactList}\small\item\em get the end iterator for \hyperlink{class_alien_nest}{Alien\+Nest} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_alien_manager_ae64cfd417be6903c5999281e1ac5a027}\label{class_alien_manager_ae64cfd417be6903c5999281e1ac5a027}} 
+std\+::deque$<$ \hyperlink{class_alien}{Alien} $\ast$ $>$\+::iterator \hyperlink{class_alien_manager_ae64cfd417be6903c5999281e1ac5a027}{abductor\+Begin} ()
+\begin{DoxyCompactList}\small\item\em get the start iterator for \hyperlink{class_abductor}{Abductor} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_alien_manager_a84234e49e21ab00caa9f3f8a492b0b8d}\label{class_alien_manager_a84234e49e21ab00caa9f3f8a492b0b8d}} 
+std\+::deque$<$ \hyperlink{class_alien}{Alien} $\ast$ $>$\+::iterator \hyperlink{class_alien_manager_a84234e49e21ab00caa9f3f8a492b0b8d}{abductor\+End} ()
+\begin{DoxyCompactList}\small\item\em get the end iterator for \hyperlink{class_abductor}{Abductor} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_alien_manager_a9aa20d1193e10765f9a7d52e0729bc29}\label{class_alien_manager_a9aa20d1193e10765f9a7d52e0729bc29}} 
+std\+::deque$<$ \hyperlink{class_alien}{Alien} $\ast$ $>$\+::iterator \hyperlink{class_alien_manager_a9aa20d1193e10765f9a7d52e0729bc29}{mutant\+Begin} ()
+\begin{DoxyCompactList}\small\item\em get the start iterator for \hyperlink{class_mutant}{Mutant} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_alien_manager_ade814cb64a409e7bd2f88be5be159b16}\label{class_alien_manager_ade814cb64a409e7bd2f88be5be159b16}} 
+std\+::deque$<$ \hyperlink{class_alien}{Alien} $\ast$ $>$\+::iterator \hyperlink{class_alien_manager_ade814cb64a409e7bd2f88be5be159b16}{mutant\+End} ()
+\begin{DoxyCompactList}\small\item\em get the end iterator for \hyperlink{class_mutant}{Mutant} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_alien_manager_a0a2ffae7f5a87d94401b0a0375c02dcd}\label{class_alien_manager_a0a2ffae7f5a87d94401b0a0375c02dcd}} 
+std\+::vector$<$ \hyperlink{class_astronaut}{Astronaut} $>$ $\ast$ \hyperlink{class_alien_manager_a0a2ffae7f5a87d94401b0a0375c02dcd}{get\+Astronauts} ()
+\begin{DoxyCompactList}\small\item\em get the \hyperlink{class_astronaut}{Astronaut} game data \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_alien_manager_a40c5a7ffc4c38f3c970f63936a87ccd8}\label{class_alien_manager_a40c5a7ffc4c38f3c970f63936a87ccd8}} 
+const \hyperlink{class_player}{Player} $\ast$ \hyperlink{class_alien_manager_a40c5a7ffc4c38f3c970f63936a87ccd8}{get\+Player} ()
+\begin{DoxyCompactList}\small\item\em get the \hyperlink{class_player}{Player} game data \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_alien_manager_a5c6478a22609ee2f69a754a3e20c5cc4}\label{class_alien_manager_a5c6478a22609ee2f69a754a3e20c5cc4}} 
+const \hyperlink{class_terrain}{Terrain} $\ast$ \hyperlink{class_alien_manager_a5c6478a22609ee2f69a754a3e20c5cc4}{get\+Terrain} ()
+\begin{DoxyCompactList}\small\item\em get the \hyperlink{class_terrain}{Terrain} game data \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_alien_manager_aeaf8bdda166e1db2b0694447e467820c}\label{class_alien_manager_aeaf8bdda166e1db2b0694447e467820c}} 
+const \hyperlink{class_camera}{Camera} $\ast$ \hyperlink{class_alien_manager_aeaf8bdda166e1db2b0694447e467820c}{get\+Camera} ()
+\begin{DoxyCompactList}\small\item\em get the \hyperlink{class_camera}{Camera} game data \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_alien_manager_a2a35d52504c40c4e81bdf7212918dbfe}\label{class_alien_manager_a2a35d52504c40c4e81bdf7212918dbfe}} 
+void \hyperlink{class_alien_manager_a2a35d52504c40c4e81bdf7212918dbfe}{add\+Nest} (sf\+::\+Vector2f position)
+\begin{DoxyCompactList}\small\item\em adds an \hyperlink{class_alien_nest}{Alien\+Nest} to \hyperlink{class_alien}{Alien} container \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_alien_manager_a5887485929cb6cca8ac030297c4748d1}\label{class_alien_manager_a5887485929cb6cca8ac030297c4748d1}} 
+void \hyperlink{class_alien_manager_a5887485929cb6cca8ac030297c4748d1}{add\+Abductor} (sf\+::\+Vector2f position)
+\begin{DoxyCompactList}\small\item\em adds an \hyperlink{class_abductor}{Abductor} to \hyperlink{class_alien}{Alien} container \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_alien_manager_ab7fb2b7a6977ba318f75d6c66acde43b}\label{class_alien_manager_ab7fb2b7a6977ba318f75d6c66acde43b}} 
+void \hyperlink{class_alien_manager_ab7fb2b7a6977ba318f75d6c66acde43b}{add\+Mutant} (sf\+::\+Vector2f position)
+\begin{DoxyCompactList}\small\item\em adds an \hyperlink{class_mutant}{Mutant} to \hyperlink{class_alien}{Alien} container \end{DoxyCompactList}\item 
+void \hyperlink{class_alien_manager_a1ef71e58d02a0cea52eadccdb2b94ad6}{update} (float dt)
+\begin{DoxyCompactList}\small\item\em Updates all the \hyperlink{class_alien}{Alien} objects. \end{DoxyCompactList}\item 
+void \hyperlink{class_alien_manager_afe738938dd3967a60ee393d956d5e728}{render} (sf\+::\+Render\+Window $\ast$window, \hyperlink{class_camera}{Camera} $\ast$camera)
+\begin{DoxyCompactList}\small\item\em Renders all the \hyperlink{class_alien}{Alien} objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manages \hyperlink{class_alien}{Alien} objects. 
+
+Manages the creation, deletion, updating and rendering of all \hyperlink{class_alien}{Alien} objects. Provides an interface to all aliens for other classes. Contains pointers to game data for \hyperlink{class_alien}{Alien} update. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_alien_manager_a742da1e39310d7693fa2fcbc60d7bf15}\label{class_alien_manager_a742da1e39310d7693fa2fcbc60d7bf15}} 
+\index{Alien\+Manager@{Alien\+Manager}!Alien\+Manager@{Alien\+Manager}}
+\index{Alien\+Manager@{Alien\+Manager}!Alien\+Manager@{Alien\+Manager}}
+\subsubsection{\texorpdfstring{Alien\+Manager()}{AlienManager()}}
+{\footnotesize\ttfamily Alien\+Manager\+::\+Alien\+Manager (\begin{DoxyParamCaption}\item[{\hyperlink{class_player}{Player} $\ast$}]{player,  }\item[{std\+::vector$<$ \hyperlink{class_astronaut}{Astronaut} $>$ $\ast$}]{astronauts,  }\item[{\hyperlink{class_terrain}{Terrain} $\ast$}]{terrain,  }\item[{\hyperlink{class_camera}{Camera} $\ast$}]{camera }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_alien_manager}{Alien\+Manager} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player} & pointer for \hyperlink{class_player}{Player} game data \\
+\hline
+{\em astronauts} & pointer for \hyperlink{class_astronaut}{Astronaut} game data \\
+\hline
+{\em terrain} & pointer for \hyperlink{class_terrain}{Terrain} game data \\
+\hline
+{\em camera} & pointer for \hyperlink{class_camera}{Camera} game data \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_alien_manager_afe738938dd3967a60ee393d956d5e728}\label{class_alien_manager_afe738938dd3967a60ee393d956d5e728}} 
+\index{Alien\+Manager@{Alien\+Manager}!render@{render}}
+\index{render@{render}!Alien\+Manager@{Alien\+Manager}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Alien\+Manager\+::render (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window $\ast$}]{window,  }\item[{\hyperlink{class_camera}{Camera} $\ast$}]{camera }\end{DoxyParamCaption})}
+
+
+
+Renders all the \hyperlink{class_alien}{Alien} objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & S\+F\+ML window to render to \\
+\hline
+{\em camera} & adjusts positions based on the camera position draws \hyperlink{class_alien}{Alien} to the screen \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_alien_manager_a1ef71e58d02a0cea52eadccdb2b94ad6}\label{class_alien_manager_a1ef71e58d02a0cea52eadccdb2b94ad6}} 
+\index{Alien\+Manager@{Alien\+Manager}!update@{update}}
+\index{update@{update}!Alien\+Manager@{Alien\+Manager}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Alien\+Manager\+::update (\begin{DoxyParamCaption}\item[{float}]{dt }\end{DoxyParamCaption})}
+
+
+
+Updates all the \hyperlink{class_alien}{Alien} objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & delta time since last frame \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+A\+I\+Defender\+Project/Alien\+Manager.\+h\item 
+A\+I\+Defender\+Project/Alien\+Manager.\+cpp\end{DoxyCompactItemize}

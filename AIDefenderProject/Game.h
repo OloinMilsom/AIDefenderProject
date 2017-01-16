@@ -33,11 +33,16 @@
 #include "Astronaut.h"
 #include "AlienManager.h"
 
+//! Class manages game logic
+/*!
+	This class includes all the game logic and is the controller class for
+	the project. It contains all the game entities and manages communication
+	between them.
+*/
 class Game : EventListener {
 private:
 	sf::RenderWindow * m_window;
 	InputManager m_inputManager;
-	//BulletManager m_bulletManager;
 
 	Player * m_player;
 	Terrain m_terrain;
@@ -51,7 +56,7 @@ private:
 	void update(float dt);
 	void render();
 public:
-	Game();
-	void loop();
-	void onEvent(sf::Event evt);
+	Game(); //!< Game constructor
+	void loop(); //!< Game loop, all run time game logic executed here
+	void onEvent(sf::Event evt); //!< Game responds to key events here
 };
