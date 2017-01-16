@@ -15,6 +15,8 @@ private:
 	sf::RectangleShape m_sprite;
 	float m_vel;
 	int avoidTarget;
+	bool m_beingAbducted;
+	bool m_alive;
 
 public:
 	Astronaut(float x = 0, AlienManager * alienManager = nullptr);
@@ -24,4 +26,8 @@ public:
 	void wander();
 	bool isAlienNear();
 	sf::Vector2f getPos() const;
+	bool getAlive() const;
+	void setPos(sf::Vector2f val);
+	void setBeingAbducted(bool val);
+	void setAlive(bool val);
 };
