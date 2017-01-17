@@ -2,6 +2,7 @@
 
 Mutant::Mutant(sf::Vector2f position, float speed, float acceleration) : Alien(position, speed, acceleration) {
 	m_type = AlienType::mutant;
+	m_state = MutantState::following;
 
 	m_angle = acos(-1) * 2 * static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 	m_acceleration = sf::Vector2f(cos(m_angle), sin(m_angle)) * MAX_ACCELERATION;
@@ -11,11 +12,17 @@ Mutant::Mutant(sf::Vector2f position, float speed, float acceleration) : Alien(p
 }
 
 void Mutant::update(float dt, AlienManager * data) {
-	wander();
-	avoidBounds(data->getTerrain());
-	//moveToPlayer(data->getPlayer(), data->getCamera());
-	swarm(data);
-	move(dt);
+	switch (m_state) {
+	case MutantState::following:
+		wander();
+		avoidBounds(data->getTerrain());
+		moveToPlayer(data->getPlayer(), data->getCamera(), true);
+		swarm(data);
+		move(dt);
+		break;
+	default:
+		break;
+	}
 }
 
 void Mutant::swarm(AlienManager * data) {
@@ -49,18 +56,25 @@ void Mutant::swarm(AlienManager * data) {
 		if ((*iter)->getPos() != m_position) {
 			sf::Vector2f d = ((*data->getCamera()) + (*iter)->getPos()) - ((*data->getCamera()) + m_position);
 			float distSqr = d.x * d.x + d.y * d.y;
-			if (distSqr < SWARM_DISTANCE) {
-				m_acceleration += d * ((SWARM_ATTRACTION / std::pow(distSqr, SWARM_ATTRACTION_EXP)) - (PLAYER_REPULSE / std::pow(distSqr, SWARM_ATTRACTION_EXP)));
+			float dist = sqrt(distSqr);
+			if (dist < SWARM_DISTANCE) {
+				m_acceleration += d * ((SWARM_ATTRACTION / std::pow(dist, SWARM_ATTRACTION_EXP)) - (SWARM_REPULSION / std::pow(dist, SWARM_REPULSION_EXP)));
 			}
 		}
 	}
 }
 
-void Mutant::moveToPlayer(const Player * player, const Camera * camera) {
+void Mutant::moveToPlayer(const Player * player, const Camera * camera, bool towards) {
 	sf::Vector2f myAdjustedPos = (*camera) + m_position;
 	sf::Vector2f playerAdjustedPos = (*camera) + player->getPosition();
 	sf::Vector2f d =  playerAdjustedPos - myAdjustedPos;
 	float lengthSquared = d.x * d.x + d.y * d.y;
 	float length = sqrt(lengthSquared);
-	m_acceleration += d * ((PLAYER_FOLLOW / lengthSquared) - (PLAYER_REPULSE / (lengthSquared * length)));
+	
+	if (towards) {
+		m_acceleration += d * ((PLAYER_FOLLOW / length) - (PLAYER_REPULSE / (lengthSquared)));
+	}
+	else {
+		m_acceleration -= d * ((PLAYER_FOLLOW / length) - (PLAYER_REPULSE / (lengthSquared)));
+	}
 }
