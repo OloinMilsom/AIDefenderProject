@@ -135,8 +135,11 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MiniMap.cpp" />
     <ClCompile Include="Mutant.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Powerup.cpp" />
+    <ClCompile Include="PowerupManager.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TrackingBullet.cpp" />
   </ItemGroup>
@@ -152,8 +155,11 @@
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="MiniMap.h" />
     <ClInclude Include="Mutant.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Powerup.h" />
+    <ClInclude Include="PowerupManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TrackingBullet.h" />

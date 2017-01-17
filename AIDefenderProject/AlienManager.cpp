@@ -9,7 +9,8 @@ AlienManager::AlienManager(Player * player, std::vector<Astronaut>* astronauts, 
 	:m_player(player), 
 	 m_astronauts(astronauts),
 	 m_terrain(terrain),
-	 m_camera(camera){
+	 m_camera(camera),
+	 m_map(&m_aliens, astronauts, player){
 }
 
 AlienManager::~AlienManager() {
@@ -114,6 +115,14 @@ void AlienManager::addMutant(sf::Vector2f position) {
 #pragma region Update/Render
 
 void AlienManager::update(float dt) {
+	//for (int i = 0; i < m_aliens.size(); i++) //m_player is const, meaning i cant edit it. Must change this for collisions
+	//{
+	//	if (m_player->Collide(m_aliens.at(i)->getRect()))
+	//	{
+
+	//	}
+	//}
+
 	for (auto iter = m_aliens.begin(); iter != m_aliens.end(); iter++) {
 		(*iter)->update(dt, this);
 	}
@@ -124,6 +133,7 @@ void AlienManager::render(sf::RenderWindow * window, Camera * camera) {
 	for (auto iter = m_aliens.begin(); iter != m_aliens.end(); iter++) {
 		(*iter)->render(window, camera);
 	}
+	m_map.render(window, m_nestCount, m_abductorCount, m_mutantCount);
 }
 
 #pragma endregion

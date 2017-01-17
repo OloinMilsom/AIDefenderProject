@@ -52,7 +52,7 @@ void Astronaut::wander()
 {
 	int rnd = rand() % 1200;
 	if (rnd == 0) {
-		m_vel = 0;
+		m_vel = -m_vel;
 	}
 
 }
@@ -65,7 +65,7 @@ bool Astronaut::isAlienNear()
 		sf::Vector2f length = aliens[i]->getPos() - m_position;
 		length.x *= length.x;
 		length.y *= length.y;
-		if (length.x + length.y > 50)
+		if (length.x + length.y < 100)
 		{
 			avoidTarget = i;
 			return true;

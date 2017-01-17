@@ -25,6 +25,12 @@
     <Filter Include="Header Files\Bullets">
       <UniqueIdentifier>{bc464e5f-c232-4063-aa50-a356a748dc4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Powerups">
+      <UniqueIdentifier>{38c9f867-f212-40f3-80cb-9ee137bf61ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Powerups">
+      <UniqueIdentifier>{99d96bbc-1283-43c3-b87e-4d1dd78d9683}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -71,6 +77,15 @@
     </ClCompile>
     <ClCompile Include="TrackingBullet.cpp">
       <Filter>Source Files\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Powerup.cpp">
+      <Filter>Source Files\Powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerupManager.cpp">
+      <Filter>Source Files\Powerups</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +136,15 @@
     </ClInclude>
     <ClInclude Include="TrackingBullet.h">
       <Filter>Header Files\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Powerup.h">
+      <Filter>Header Files\Powerups</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerupManager.h">
+      <Filter>Header Files\Powerups</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

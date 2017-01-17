@@ -81,3 +81,8 @@ sf::Vector2f Alien::getVel() {
 sf::Vector2f Alien::getAccel() {
 	return m_acceleration;
 }
+
+sf::RectangleShape Alien::getRect()
+{
+	return m_sprite;
+}

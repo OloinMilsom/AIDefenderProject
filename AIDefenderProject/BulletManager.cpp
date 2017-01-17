@@ -65,3 +65,8 @@ bool BulletManager::checkCollision(int index, sf::RectangleShape rect)
 }
 
 bool BulletManager::getIsEnemyBullet(int index) { return m_bullets.at(index).getIsEnemyBullet(); }
+
+int BulletManager::getSize()
+{
+	return m_bullets.size();
+}

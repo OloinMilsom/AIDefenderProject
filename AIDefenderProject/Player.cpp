@@ -46,6 +46,15 @@ void Player::update(float dt) {
 		}
 	}
 
+	for (int i = 0; i < BulletManager::getInstance()->getSize(); i++)
+	{
+		if (BulletManager::getInstance()->checkCollision(i, m_sprite) && BulletManager::getInstance()->getIsEnemyBullet(i))
+		{
+			//Do bullet collisions
+		}
+	}
+	
+
 	m_pos.x += m_xVel * dt;
 	m_sprite.setPosition(m_pos);
 }
@@ -113,4 +122,19 @@ void Player::setPosition(sf::Vector2f val) {
 bool Player::getDirection()
 {
 	return m_movingRight;
+}
+
+bool Player::Collide(sf::RectangleShape rect)
+{
+	return m_sprite.getTextureRect().intersects(rect.getTextureRect());
+}
+
+bool Player::Collide(sf::CircleShape circ)
+{
+	return m_sprite.getTextureRect().intersects(circ.getTextureRect());
+}
+
+bool Player::Collide(sf::Vertex vert)
+{
+	return false;
 }

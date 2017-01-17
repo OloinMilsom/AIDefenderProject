@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "EventListener.h"
 #include "Camera.h"
+#include "BulletManager.h"
 
 class Player : public EventListener {
 private:
@@ -23,4 +24,7 @@ public:
 	sf::Vector2f getPosition() const;
 	void setPosition(sf::Vector2f);
 	bool getDirection();
+	bool Collide(sf::RectangleShape);
+	bool Collide(sf::CircleShape);
+	bool Collide(sf::Vertex);
 };

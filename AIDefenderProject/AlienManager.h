@@ -3,9 +3,10 @@
 #include "stdafx.h"
 #include <deque>
 #include "Alien.h"
-
 #include "Astronaut.h"
 #include "Player.h"
+#include "MiniMap.h"
+
 
 class Alien;
 class Astronaut;
@@ -30,6 +31,8 @@ private:
 																		// from addition into the alien container
 
 	void clearAdditionStage();	// this container holds any additions until iteration through the alien list concludes
+
+	MiniMap m_map;
 
 public:
 	// constructor/destructor

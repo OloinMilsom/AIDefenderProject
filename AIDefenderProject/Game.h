@@ -32,6 +32,7 @@
 #include "Camera.h"
 #include "Astronaut.h"
 #include "AlienManager.h"
+#include "PowerupManager.h"
 
 class Game : EventListener {
 private:
@@ -50,6 +51,7 @@ private:
 
 	void update(float dt);
 	void render();
+
 public:
 	Game();
 	void loop();

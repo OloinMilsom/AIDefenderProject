@@ -66,6 +66,7 @@ void Game::render() {
 	m_window->display();
 }
 
+
 void Game::loop() {
 	while (m_window->isOpen()) {
 		float now = m_clock.getElapsedTime().asSeconds();
@@ -92,11 +93,11 @@ void Game::onEvent(sf::Event evt) {
 		case sf::Keyboard::Space:
 			if (m_player->getDirection())
 			{
-				BulletManager::getInstance()->addBullet(m_player->getPosition(), sf::Vector2f(1.0f, 0), false, false); //Moving Right
+				BulletManager::getInstance()->addBullet(m_player->getPosition(), sf::Vector2f(15.0f, 0), false, false); //Moving Right
 			}
 			else
 			{
-				BulletManager::getInstance()->addBullet(m_player->getPosition(), sf::Vector2f(-1.0f, 0), false, false); //Moving Left
+				BulletManager::getInstance()->addBullet(m_player->getPosition(), sf::Vector2f(-15.0f, 0), false, false); //Moving Left
 			}
 			
 		default:

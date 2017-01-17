@@ -27,5 +27,6 @@ public:
 	void render(sf::RenderWindow * window, Camera * camera);
 
 	bool getIsEnemyBullet(int index);
+	int getSize();
 };
 

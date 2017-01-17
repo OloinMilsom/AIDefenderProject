@@ -37,5 +37,6 @@ public:
 	sf::Vector2f getPos();
 	sf::Vector2f getVel();
 	sf::Vector2f getAccel();
+	sf::RectangleShape getRect();
 	AlienType getType();
 };
