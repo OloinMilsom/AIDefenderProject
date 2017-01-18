@@ -75,9 +75,9 @@ void BulletManager::render(sf::RenderWindow * window, Camera * camera)
 	}
 }
 
-bool BulletManager::checkCollision(int index, sf::RectangleShape rect) 
+bool BulletManager::checkCollision(int index, sf::Sprite sprite) 
 {
-	return rect.getGlobalBounds().contains(m_bullets.at(index).getPos()); //Takes the rect from the player or enemy's rectangle shape and checks if it contains the bullet
+	return sprite.getGlobalBounds().contains(m_bullets.at(index).getPos()); //Takes the rect from the player or enemy's rectangle shape and checks if it contains the bullet
 }
 
 bool BulletManager::getIsEnemyBullet(int index) { return m_bullets.at(index).getIsEnemyBullet(); }

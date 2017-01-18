@@ -25,7 +25,7 @@ public:
 	void addTrackingBullet(sf::Vector2f, sf::Vector2f, const sf::Vector2f * target);
 	void update();
 	void smartBomb();
-	bool checkCollision(int, sf::RectangleShape);
+	bool checkCollision(int, sf::Sprite);
 	void render(sf::RenderWindow * window, Camera * camera);
 
 	bool getIsEnemyBullet(int index);

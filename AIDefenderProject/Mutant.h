@@ -30,6 +30,9 @@ private:
 	const float SWARM_REPULSION = 3750;
 	const float SWARM_REPULSION_EXP = 3;
 
+	static int m_rotateCount;
+	static int m_diveCount;
+
 	MutantState m_state;
 	AttackType m_attackType;
 	struct { float attackAngle; float attackDistance; int direction; } m_attackData;

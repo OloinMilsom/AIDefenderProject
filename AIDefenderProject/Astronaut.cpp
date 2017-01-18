@@ -1,7 +1,10 @@
 #include "Astronaut.h"
 
 Astronaut::Astronaut(float x, AlienManager * alienManager) : m_position(sf::Vector2f(x, 0)), m_alienManager(alienManager), m_beingAbducted(false) {
-	m_sprite = sf::RectangleShape(sf::Vector2f(10, 10)); 
+	m_tex.loadFromFile("Resources/Astronaut.png");
+	m_sprite = sf::Sprite(m_tex);// sf::IntRect(0, 0, m_tex.getSize().x, m_tex.getSize().y));
+	m_sprite.setOrigin(m_tex.getSize().x / 2, m_tex.getSize().y / 2);
+
 	int rnd = rand() % 3;
 	if (rnd == 0) {
 		m_vel = 0;
@@ -23,19 +26,17 @@ void Astronaut::update(float dt, Terrain * terrain) {
 			wander();
 		}
 
-
 		m_position.x += m_vel * dt;
 
-		m_position.y = terrain->getHeightAt(m_position.x + m_sprite.getSize().x / 2) - m_sprite.getSize().y;
+		m_position.y = terrain->getHeightAt(m_position.x + m_tex.getSize().x / 2) - m_tex.getSize().y / 2;
 	}
+	m_sprite.setTexture(m_tex);
 	m_sprite.setPosition(m_position);
 }
 
 void Astronaut::render(sf::RenderWindow * window, Camera * camera) {
 	if (m_alive) {
-		sf::RectangleShape temp = m_sprite;
-		temp.setPosition((*camera) + temp.getPosition());
-		window->draw(temp);
+		window->draw((*camera) + m_sprite);
 	}
 }
 

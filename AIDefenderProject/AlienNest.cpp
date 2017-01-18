@@ -6,8 +6,9 @@ AlienNest::AlienNest(sf::Vector2f position, float speed, float acceleration) : A
 	m_angle = acos(-1) * 2 * static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 	m_acceleration = sf::Vector2f(cos(m_angle), sin(m_angle)) * MAX_ACCELERATION;
 
-	m_sprite.setSize(sf::Vector2f(20, 10));
-	m_sprite.setFillColor(sf::Color::Magenta);
+	m_tex.loadFromFile("Resources/Nest.png");
+	m_sprite = sf::Sprite(m_tex, sf::IntRect(0, 0, m_tex.getSize().x / 6, m_tex.getSize().y));
+	m_sprite.setOrigin(m_tex.getSize().x / 12, m_tex.getSize().y / 2);
 
 	m_health = 1;
 	m_missileCount = 0;
@@ -31,6 +32,7 @@ void AlienNest::update(float dt, AlienManager * data) {
 		fireMissile(data->getPlayer());
 	}
 
+	m_sprite.setTextureRect(sf::IntRect(abs(static_cast<int>(m_position.x / 30) % 6) * (m_tex.getSize().x / 6), 0, m_tex.getSize().x / 6, m_tex.getSize().y));
 	move(dt);
 }
 

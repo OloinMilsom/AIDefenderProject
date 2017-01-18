@@ -4,8 +4,11 @@ Player::Player() : m_xVel(0) {
 	for (int i = 0; i < 4; i++) {
 		m_keyDowns[i] = false;
 	}
-	m_sprite = sf::RectangleShape(sf::Vector2f(20, 10));
-	m_sprite.setFillColor(sf::Color::Red);
+
+	m_tex.loadFromFile("Resources/Player.png");
+	m_sprite = sf::Sprite(m_tex, sf::IntRect(0, 0, m_tex.getSize().x / 2, m_tex.getSize().y));
+	m_sprite.setOrigin(m_tex.getSize().x / 4, m_tex.getSize().y / 2);
+
 	m_movingRight = true;
 	m_canHyperJump = true;
 	m_canSmartBomb = true;
@@ -62,13 +65,18 @@ void Player::update(float dt) {
 	}
 
 	m_pos.x += m_xVel * dt;
+	m_sprite.setTextureRect(sf::IntRect(abs(static_cast<int>(m_pos.x / 15) % 2) * (m_tex.getSize().x / 2), 0, m_tex.getSize().x / 2, m_tex.getSize().y));
+	if (m_xVel > 0.1f) {
+		m_sprite.setScale(1, 1);
+	}
+	else if (m_xVel < -0.1f) {
+		m_sprite.setScale(-1, 1);
+	}
 	m_sprite.setPosition(m_pos);
 }
 
 void Player::render(sf::RenderWindow * window, Camera * camera) {
-	sf::RectangleShape temp = m_sprite;
-	temp.setPosition((*camera) + temp.getPosition());
-	window->draw(temp);
+	window->draw((*camera) + m_sprite);
 }
 
 void Player::onEvent(sf::Event evt) {

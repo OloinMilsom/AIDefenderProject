@@ -10,8 +10,9 @@ Abductor::Abductor(sf::Vector2f position, float speed, float acceleration) : Ali
 	m_angle = acos(-1) * 2 * static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 	m_acceleration = sf::Vector2f(cos(m_angle), sin(m_angle)) * MAX_ACCELERATION;
 
-	m_sprite.setSize(sf::Vector2f(20, 10));
-	m_sprite.setFillColor(sf::Color::Yellow);
+	m_tex.loadFromFile("Resources/Abductor.png");
+	m_sprite = sf::Sprite(m_tex, sf::IntRect(0, 0, m_tex.getSize().x / 6, m_tex.getSize().y));
+	m_sprite.setOrigin(m_tex.getSize().x / 12, m_tex.getSize().y / 2);
 }
 
 void Abductor::update(float dt, AlienManager * data) {
@@ -24,6 +25,7 @@ void Abductor::update(float dt, AlienManager * data) {
 	}
 	chaseAstronaut(data);
 
+	m_sprite.setTextureRect(sf::IntRect(abs(static_cast<int>(m_position.x / 15) % 6) * (m_tex.getSize().x / 6.0f), 0, m_tex.getSize().x / 6.0f, m_tex.getSize().y));
 	move(dt);
 }
 

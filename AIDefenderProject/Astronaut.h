@@ -13,7 +13,10 @@ private:
 	const AlienManager * m_alienManager;
 
 	sf::Vector2f m_position;
-	sf::RectangleShape m_sprite;
+
+	sf::Texture m_tex;
+	sf::Sprite m_sprite;
+
 	float m_vel;
 	int avoidTarget;
 	bool m_beingAbducted;

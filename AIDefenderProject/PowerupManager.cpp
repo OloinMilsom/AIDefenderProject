@@ -43,18 +43,18 @@ void PowerupManager::update()
 {
 	for (int i = 0; i < m_powerups.size(); i++)
 	{
-		if (m_player->Collide(m_powerups.at(i).getRect()))
-		{
-			m_powerups.at(i).trigger();
-			if (m_powerups.at(i).getType() == 0)
-			{
-				m_player->giveHyperJump();
-			}
-			else
-			{
-				//other powerup
-			}
-		}
+		//if (m_player->Collide(m_powerups.at(i).getRect()))
+		//{
+		//	m_powerups.at(i).trigger();
+		//	if (m_powerups.at(i).getType() == 0)
+		//	{
+		//		m_player->giveHyperJump();
+		//	}
+		//	else
+		//	{
+		//		//other powerup
+		//	}
+		//}
 	}
 
 	if (m_clock.getElapsedTime() - m_startTime > m_interval)

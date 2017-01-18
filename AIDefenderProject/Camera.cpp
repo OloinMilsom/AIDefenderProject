@@ -21,6 +21,6 @@ sf::Vector2f Camera::operator+(sf::Vector2f vec) const {
 }
 
 sf::Sprite Camera::operator+(sf::Sprite spr) {
-	spr.setPosition(m_transform + spr.getPosition());
+	spr.setPosition(operator+(spr.getPosition()));
 	return spr;
 }

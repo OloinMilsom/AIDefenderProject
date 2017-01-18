@@ -13,10 +13,7 @@ void Alien::hit()
 }
 
 void Alien::render(sf::RenderWindow * window, Camera * camera) {
-	sf::RectangleShape temp = m_sprite;
-	temp.setPosition((*camera) + temp.getPosition());
-
-	sf::VertexArray velAccel(sf::Lines, 4);
+	/*sf::VertexArray velAccel(sf::Lines, 4);
 	velAccel[0].position = (*camera) + m_position;
 	velAccel[0].color = sf::Color::Blue;
 	velAccel[1].position = (*camera) + m_position + m_velocity;
@@ -25,8 +22,9 @@ void Alien::render(sf::RenderWindow * window, Camera * camera) {
 	velAccel[2].color = sf::Color::Green;
 	velAccel[3].position = (*camera) + m_position + m_acceleration;
 	velAccel[3].color = sf::Color::Green;
-	window->draw(temp);
-	window->draw(velAccel);
+	window->draw(velAccel);*/
+
+	window->draw((*camera) + m_sprite);
 }
 
 void Alien::move(float dt) {
@@ -94,7 +92,7 @@ sf::Vector2f Alien::getAccel() {
 	return m_acceleration;
 }
 
-sf::RectangleShape Alien::getRect()
+sf::Sprite Alien::getSprite()
 {
 	return m_sprite;
 }
