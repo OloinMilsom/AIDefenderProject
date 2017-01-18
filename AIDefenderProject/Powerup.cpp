@@ -23,8 +23,7 @@ void Powerup::reset(int type)
 
 void Powerup::trigger()
 {
-	//m_alive = false;
-	//m_sprite.setFillColor(sf::Color::White);
+	m_alive = false;
 }
 
 Powerup::~Powerup()

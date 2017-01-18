@@ -10,6 +10,7 @@ class BulletManager
 {
 private:
 	std::vector<Bullet> m_bullets;
+	std::vector<TrackingBullet> m_missiles;
 	static BulletManager *m_instance;
 	
 public:
@@ -40,9 +41,9 @@ public:
 	\param vel velocity of the new Bullet
 	\param target vector to move towards
 	*/
-	void addTrackingBullet(sf::Vector2f pos, sf::Vector2f vel, const sf::Vector2f * target);
+	void addTrackingBullet(sf::Vector2f pos, sf::Vector2f vel);
 
-	void update(); //!< updates all bullets
+	void update(sf::Vector2f pos); //!< updates all bullets
 	void smartBomb(); //!< creates and adds a smart bomb
 	bool checkCollision(int, sf::Sprite); //!< checks collision between a sprite and a bullet
 
@@ -55,6 +56,9 @@ public:
 	void render(sf::RenderWindow * window, Camera * camera);
 
 	bool getIsEnemyBullet(int index); //!< gets if bullet at index is an enemy bullet
-	int getSize(); //!< gets size of the bullet container
+	int getBulletSize(); //!< gets size of the bullet container
+	int getMissileSize();
+	std::vector<Bullet>* getBulletPointer();
+	std::vector<TrackingBullet>* getMissilePointer();
 };
 

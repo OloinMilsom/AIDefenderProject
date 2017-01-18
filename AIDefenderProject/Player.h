@@ -23,10 +23,13 @@ private:
 	sf::Texture m_tex;
 	sf::Sprite m_sprite;
 
+	int m_health;
+
 	bool m_keyDowns[4]; // 0 = W, 1 = A, 2 = S, 3 = D
 	bool m_movingRight;
 	bool m_canHyperJump;
 	bool m_canSmartBomb;
+	bool m_canFire;
 	sf::Clock m_clock; //Clock for getting current time
 	sf::Time m_lastBombUsed; //Time that the bullet is created or reset
 	sf::Time m_bombCooldown = sf::seconds(60.0f);
@@ -49,9 +52,9 @@ public:
 	void setPosition(sf::Vector2f); //!< Player position vector setter
 	void smartBomb(); //!< Player use a smart bomb
 	void hyperJump(); //!< Player use a hyperjump
+	void hit();
 	void giveHyperJump(); //!< Give Player a hyperjump use
 	bool getDirection(); //!< Get the Player direction
-	bool Collide(sf::RectangleShape); //!< Player collision detection with Rectangle
-	bool Collide(sf::CircleShape); //!< Player collision detection with Circle
-	bool Collide(sf::Vertex); //!< Player collision detection with a vertex
+	int getHealth();
+	sf::Sprite getSprite();
 };

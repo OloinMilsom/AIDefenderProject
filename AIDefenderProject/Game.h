@@ -33,6 +33,8 @@
 #include "Astronaut.h"
 #include "AlienManager.h"
 #include "PowerupManager.h"
+#include "ObstacleManager.h"
+#include "CollisionManager.h"
 
 //! Class manages game logic
 /*!
@@ -50,6 +52,8 @@ private:
 	std::vector<Astronaut> m_astronauts;
 	AlienManager * m_alienManager;
 	PowerupManager m_powerupManager;
+	CollisionManager m_collisionManager;
+	ObstacleManager m_obsticleManager;
 	
 	Camera m_camera;
 	sf::Clock m_clock;

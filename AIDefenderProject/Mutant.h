@@ -18,7 +18,8 @@ private:
 
 	enum AttackType {
 		rotate,
-		dive
+		dive,
+		none
 	};
 
 	const float PLAYER_FOLLOW = 100;

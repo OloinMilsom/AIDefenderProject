@@ -30,5 +30,6 @@ public:
 	draws all the powerups to the screen
 	*/
 	void render(sf::RenderWindow * window, Camera * camera);
+	std::vector<Powerup>* getPointer();
 };
 
