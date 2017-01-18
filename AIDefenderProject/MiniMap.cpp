@@ -29,24 +29,42 @@ void MiniMap::render(sf::RenderWindow * window, int nestCount, int abductorCount
 	temp.setFillColor(sf::Color::Magenta); //colour for nests
 	for (int i = 0; i < nestCount; i++) //nests
 	{
-		temp.setPosition(m_aliens->at(i)->getPos().x / 9, m_aliens->at(i)->getPos().y / 9);
-
+		sf::Vector2f tempPos(m_aliens->at(i)->getPos().x / 9, m_aliens->at(i)->getPos().y / 9);
+		while (tempPos.x > 800) {
+			tempPos.x -= 800;
+		}
+		while (tempPos.x < 0) {
+			tempPos.x += 800;
+		}
+		temp.setPosition(tempPos);
 		window->draw(temp);
 	}
 	
 	temp.setFillColor(sf::Color::Yellow); //Colour for abductors
 	for (int i = nestCount+1; i < nestCount+abductorCount; i++) //abductors
 	{
-		temp.setPosition(m_aliens->at(i)->getPos().x / 9, m_aliens->at(i)->getPos().y / 9);
-
+		sf::Vector2f tempPos(m_aliens->at(i)->getPos().x / 9, m_aliens->at(i)->getPos().y / 9);
+		while (tempPos.x > 800) {
+			tempPos.x -= 800;
+		}
+		while (tempPos.x < 0) {
+			tempPos.x += 800;
+		}
+		temp.setPosition(tempPos);
 		window->draw(temp);
 	}
 	
 	temp.setFillColor(sf::Color::Red); //Colour for mutants
 	for (int i = nestCount + abductorCount + 1; i <  m_aliens->size(); i++) //mutants
 	{
-		temp.setPosition(m_aliens->at(i)->getPos().x / 9, m_aliens->at(i)->getPos().y / 9);
-
+		sf::Vector2f tempPos(m_aliens->at(i)->getPos().x / 9, m_aliens->at(i)->getPos().y / 9);
+		while (tempPos.x > 800) {
+			tempPos.x -= 800;
+		}
+		while (tempPos.x < 0) {
+			tempPos.x += 800;
+		}
+		temp.setPosition(tempPos);
 		window->draw(temp);
 	}
 
@@ -54,13 +72,27 @@ void MiniMap::render(sf::RenderWindow * window, int nestCount, int abductorCount
 	temp.setFillColor(sf::Color::Green); //Colour for astronauts
 	for (int i = 0; i < m_astronauts->size(); i++)
 	{
-		temp.setPosition(m_astronauts->at(i).getPos().x/9, m_astronauts->at(i).getPos().y/9);
-
+		sf::Vector2f tempPos(m_astronauts->at(i).getPos().x / 9, m_astronauts->at(i).getPos().y / 9);
+		while (tempPos.x > 800) {
+			tempPos.x -= 800;
+		}
+		while (tempPos.x < 0) {
+			tempPos.x += 800;
+		}
+		temp.setPosition(tempPos);
 		window->draw(temp);
 	}
 
 	temp.setFillColor(sf::Color::White);
 	temp.setSize(sf::Vector2f(4.0f, 4.0f));
-	temp.setPosition(m_player->getPosition().x / 9, m_player->getPosition().y / 9);
+
+	sf::Vector2f tempPos(m_player->getPosition().x / 9, m_player->getPosition().y / 9);
+	while (tempPos.x > 800) {
+		tempPos.x -= 800;
+	}
+	while (tempPos.x < 0) {
+		tempPos.x += 800;
+	}
+	temp.setPosition(tempPos);
 	window->draw(temp);
 }

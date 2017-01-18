@@ -62,6 +62,6 @@ public:
 	sf::Vector2f getPos(); //!< returns the Alien position
 	sf::Vector2f getVel(); //!< returns the Alien velocity
 	sf::Vector2f getAccel(); //!< returns the Alien acceleration
-	sf::Sprite getSprite();
+	sf::Sprite getSprite(); //!< returns the Alien sprite
 	AlienType getType(); //!< returns the Type of the Alien
 };

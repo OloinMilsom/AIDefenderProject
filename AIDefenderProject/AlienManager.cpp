@@ -9,8 +9,9 @@ AlienManager::AlienManager(Player * player, std::vector<Astronaut>* astronauts, 
 	:m_player(player), 
 	 m_astronauts(astronauts),
 	 m_terrain(terrain),
-	 m_camera(camera),
-	 m_map(&m_aliens, astronauts, player){
+	 m_camera(camera)
+	 {
+	m_map = new MiniMap(&m_aliens, astronauts, player);
 }
 
 AlienManager::~AlienManager() {
@@ -133,7 +134,7 @@ void AlienManager::render(sf::RenderWindow * window, Camera * camera) {
 	for (auto iter = m_aliens.begin(); iter != m_aliens.end(); iter++) {
 		(*iter)->render(window, camera);
 	}
-	m_map.render(window, m_nestCount, m_abductorCount, m_mutantCount);
+	m_map->render(window, m_nestCount, m_abductorCount, m_mutantCount);
 }
 
 #pragma endregion

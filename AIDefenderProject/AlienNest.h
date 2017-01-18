@@ -25,5 +25,5 @@ public:
 	AlienNest behaviour described in class description.
 	*/
 	void update(float dt, AlienManager * data);
-	void fireMissile(const Player * player);
+	void fireMissile(const Player * player); //!< Fires a bullet at the player
 };

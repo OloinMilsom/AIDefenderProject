@@ -10,6 +10,7 @@
 
 class Alien;
 class Astronaut;
+class MiniMap;
 enum AlienType;
 
 //! Manages Alien objects
@@ -38,7 +39,7 @@ private:
 
 	void clearAdditionStage();	// this container holds any additions until iteration through the alien list concludes
 
-	MiniMap m_map;
+	MiniMap * m_map;
 
 public:
 	//! AlienManager constructor

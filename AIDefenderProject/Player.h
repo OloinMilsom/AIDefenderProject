@@ -4,6 +4,13 @@
 #include "Camera.h"
 #include "BulletManager.h"
 
+//! Player class
+/*!
+Player is controlled by the user using WASD keys. The player can fire lasers to kill
+Aliens as well as activating smart bombs and hyperjumps. Smart bombs kill everything
+on screen but takes a minute to recharge. The hyperjump moves the player to a random
+location.
+*/
 class Player : public EventListener {
 private:
 	// consts in pixels and seconds
@@ -25,18 +32,26 @@ private:
 	sf::Time m_bombCooldown = sf::seconds(60.0f);
 	float m_xVel;
 public:
-	Player();
-	void update(float dt);
+	Player(); //!< Player constructor
+	void update(float dt); // Player update using delta time from last frame
+
+	//! Player render function
+	/*!
+	\param window SFML window to render to
+	\param camera adjusts positions based on the camera position
+	draws the player to the screen
+	*/
 	void render(sf::RenderWindow * window, Camera * camera);
-	void onEvent(sf::Event evt);
-	sf::Vector2f getPosition() const;
-	const sf::Vector2f* getPosPointer() const;
-	void setPosition(sf::Vector2f);
-	void smartBomb();
-	void hyperJump();
-	void giveHyperJump();
-	bool getDirection();
-	bool Collide(sf::RectangleShape);
-	bool Collide(sf::CircleShape);
-	bool Collide(sf::Vertex);
+
+	void onEvent(sf::Event evt); //!< Player event response function
+	sf::Vector2f getPosition() const; //!< Player position vector accessor
+	const sf::Vector2f* getPosPointer() const; //!< Player position vector as pointer accessor
+	void setPosition(sf::Vector2f); //!< Player position vector setter
+	void smartBomb(); //!< Player use a smart bomb
+	void hyperJump(); //!< Player use a hyperjump
+	void giveHyperJump(); //!< Give Player a hyperjump use
+	bool getDirection(); //!< Get the Player direction
+	bool Collide(sf::RectangleShape); //!< Player collision detection with Rectangle
+	bool Collide(sf::CircleShape); //!< Player collision detection with Circle
+	bool Collide(sf::Vertex); //!< Player collision detection with a vertex
 };
