@@ -30,9 +30,12 @@ void Alien::render(sf::RenderWindow * window, Camera * camera) {
 }
 
 void Alien::move(float dt) {
-	m_acceleration *= MAX_ACCELERATION / sqrt(m_acceleration.x * m_acceleration.x + m_acceleration.y * m_acceleration.y);
 
-	m_velocity += m_acceleration * dt;
+	if (m_acceleration.x != 0 || m_acceleration.y != 0) {
+		m_acceleration *= MAX_ACCELERATION / sqrt(m_acceleration.x * m_acceleration.x + m_acceleration.y * m_acceleration.y);
+
+		m_velocity += m_acceleration * dt;
+	}
 
 	float velLengthSquared = m_velocity.x * m_velocity.x + m_velocity.y * m_velocity.y;
 	if (velLengthSquared > MAX_SPEED * MAX_SPEED) {
