@@ -1,15 +1,17 @@
 #include "TrackingBullet.h"
 
 
-TrackingBullet::TrackingBullet(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBullet) : Bullet(pos, vel, isEnemyBullet)
+TrackingBullet::TrackingBullet(sf::Vector2f pos, sf::Vector2f vel, const sf::Vector2f * target) : Bullet(pos, vel, target)
 {
 	m_pos = pos;
 	m_vel = vel;
+	
+	m_target = target;
 
 
 	m_alive = true;
 
-	m_isEnemyBullet = isEnemyBullet;
+	m_isEnemyBullet = true;
 
 	m_startTime = m_clock.getElapsedTime();
 
@@ -30,9 +32,9 @@ TrackingBullet::~TrackingBullet()
 {
 }
 
-void TrackingBullet::update(sf::Vector2f target)
+void TrackingBullet::update()
 {
-	m_vel = Normalize(m_pos - target); //Sets the velocity to a unit vector in the direction of the target
+	m_vel = Normalize(m_pos - sf::Vector2f(m_target->x, m_target->y)); //Sets the velocity to a unit vector in the direction of the target
 	m_pos += m_vel;
 	m_sprite.setPosition(m_pos);
 	if (m_clock.getElapsedTime() - m_startTime > lifeSpan

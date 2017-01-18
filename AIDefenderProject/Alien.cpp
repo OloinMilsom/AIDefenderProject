@@ -3,6 +3,15 @@
 Alien::Alien(sf::Vector2f pos, float speed, float acceleration) : m_position(pos), MAX_SPEED(speed), MAX_ACCELERATION(acceleration), m_alive(true) {
 }
 
+void Alien::hit()
+{
+	m_health--;
+	if (m_health <= 0)
+	{
+		m_alive = false;
+	}
+}
+
 void Alien::render(sf::RenderWindow * window, Camera * camera) {
 	sf::RectangleShape temp = m_sprite;
 	temp.setPosition((*camera) + temp.getPosition());

@@ -14,6 +14,8 @@ Game::Game () {
 	m_inputManager.addListener(sf::Event::KeyPressed, m_player);
 	m_inputManager.addListener(sf::Event::KeyReleased, m_player);
 
+	m_powerupManager = PowerupManager(m_player);
+
 	m_camera = Camera(m_window->getSize().x, m_window->getSize().y, m_window->getSize().x * 9, m_window->getSize().y);
 
 	m_alienManager = new AlienManager(m_player, &m_astronauts, &m_terrain, &m_camera);	
@@ -42,6 +44,8 @@ void Game::update(float dt) {
 	BulletManager::getInstance()->update();
 
 	m_alienManager->update(dt);
+
+	m_powerupManager.update();
 	
 	for (int i = 0; i < m_astronauts.size(); i++) {
 		m_astronauts[i].update(dt, &m_terrain);
@@ -61,6 +65,8 @@ void Game::render() {
 	}
 
 	m_alienManager->render(m_window, &m_camera);
+
+	m_powerupManager.render(m_window, &m_camera);
 
 	// Finally, display rendered frame on screen 
 	m_window->display();
@@ -93,11 +99,11 @@ void Game::onEvent(sf::Event evt) {
 		case sf::Keyboard::Space:
 			if (m_player->getDirection())
 			{
-				BulletManager::getInstance()->addBullet(m_player->getPosition(), sf::Vector2f(15.0f, 0), false, false); //Moving Right
+				BulletManager::getInstance()->addBullet(m_player->getPosition(), sf::Vector2f(15.0f, 0), false); //Moving Right
 			}
 			else
 			{
-				BulletManager::getInstance()->addBullet(m_player->getPosition(), sf::Vector2f(-15.0f, 0), false, false); //Moving Left
+				BulletManager::getInstance()->addBullet(m_player->getPosition(), sf::Vector2f(-15.0f, 0), false); //Moving Left
 			}
 			
 		default:

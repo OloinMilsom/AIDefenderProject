@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "Terrain.h"
 #include "AlienManager.h"
+#include <limits>
 
 class AlienManager;
 

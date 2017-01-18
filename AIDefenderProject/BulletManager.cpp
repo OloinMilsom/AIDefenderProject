@@ -11,7 +11,7 @@ BulletManager::~BulletManager()
 {
 }
 
-void BulletManager::addBullet(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBullet, bool isTracking)
+void BulletManager::addBullet(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBullet)
 {
 	bool needNewBullet = true; //Temorary bool to check if a new bullet is needed
 
@@ -27,17 +27,28 @@ void BulletManager::addBullet(sf::Vector2f pos, sf::Vector2f vel, bool isEnemyBu
 
 	if (needNewBullet)
 	{
-		if (isTracking)
-		{
-			m_bullets.push_back(TrackingBullet(pos, vel, isEnemyBullet)); //Adds a bullet to the vector
-		}
-		else
-		{
 			m_bullets.push_back(Bullet(pos, vel, isEnemyBullet)); //Adds a bullet to the vector
-		}
-		
 	}
-	
+}
+
+void BulletManager::addTrackingBullet(sf::Vector2f pos, sf::Vector2f vel, const sf::Vector2f * target)
+{
+	bool needNewBullet = true; //Temorary bool to check if a new bullet is needed
+
+	for (int i = 0; i < m_bullets.size(); i++) //for the size of the bullet vector
+	{
+		if (!m_bullets.at(i).getAlive())
+		{
+			m_bullets.at(i).reset(pos, vel, target);
+			needNewBullet = false; //Don't need a new bullet
+			break; //loop is no longer needed
+		}
+	}
+
+	if (needNewBullet)
+	{
+		m_bullets.push_back(TrackingBullet(pos, vel, target)); //Adds a bullet to the vector
+	}
 }
 
 void BulletManager::update()
@@ -49,6 +60,11 @@ void BulletManager::update()
 			m_bullets.at(i).update(); //Update the bullet
 		}
 	}
+}
+
+void BulletManager::smartBomb()
+{
+	//do smart bomb
 }
 
 void BulletManager::render(sf::RenderWindow * window, Camera * camera)

@@ -7,6 +7,8 @@ Player::Player() : m_xVel(0) {
 	m_sprite = sf::RectangleShape(sf::Vector2f(20, 10));
 	m_sprite.setFillColor(sf::Color::Red);
 	m_movingRight = true;
+	m_canHyperJump = true;
+	m_canSmartBomb = true;
 }
 
 void Player::update(float dt) {
@@ -54,6 +56,10 @@ void Player::update(float dt) {
 		}
 	}
 	
+	if (m_clock.getElapsedTime() - m_lastBombUsed > m_bombCooldown && !m_canSmartBomb)
+	{
+		m_canSmartBomb = true;
+	}
 
 	m_pos.x += m_xVel * dt;
 	m_sprite.setPosition(m_pos);
@@ -82,6 +88,12 @@ void Player::onEvent(sf::Event evt) {
 		case sf::Keyboard::D:
 			m_keyDowns[3] = true;
 			m_movingRight = true;
+			break;
+		case sf::Keyboard::Q:
+			hyperJump();
+			break;
+		case sf::Keyboard::E:
+			smartBomb();
 			break;
 		default:
 			break;
@@ -115,8 +127,36 @@ sf::Vector2f Player::getPosition() const {
 	return m_pos;
 }
 
+const sf::Vector2f * Player::getPosPointer()
+{
+	return &m_pos;
+}
+
 void Player::setPosition(sf::Vector2f val) {
 	m_pos = val;
+}
+
+void Player::smartBomb()
+{
+	if (true)
+	{
+		m_lastBombUsed = m_clock.getElapsedTime();
+		BulletManager::getInstance()->smartBomb();
+	}
+}
+
+void Player::hyperJump()
+{
+	if (m_canHyperJump)
+	{
+		m_pos = sf::Vector2f(rand() % (800 * 9), rand() % 600);
+		m_canHyperJump = false;
+	}
+}
+
+void Player::giveHyperJump()
+{
+	m_canHyperJump = true;
 }
 
 bool Player::getDirection()

@@ -60,18 +60,27 @@ void Astronaut::wander()
 bool Astronaut::isAlienNear()
 {
 	auto aliens = m_alienManager->getAll();
+	float lowest = std::numeric_limits<float>::max();
+
 	for (int i = 0; i < aliens.size(); i++)
 	{
-		sf::Vector2f length = aliens[i]->getPos() - m_position;
-		length.x *= length.x;
-		length.y *= length.y;
-		if (length.x + length.y < 100)
+		sf::Vector2f alienPos = aliens[i]->getPos() - m_position;
+		alienPos.x *= alienPos.x;
+		alienPos.y *= alienPos.y;
+
+		float length = sqrt(alienPos.x) + sqrt(alienPos.y);
+
+		if (length < 400)
 		{
-			avoidTarget = i;
-			return true;
+			if (length < lowest)
+			{
+				lowest = length;
+				avoidTarget = i;
+			}
 		}
 	}
-	return false;
+
+	return lowest != std::numeric_limits<float>::max();
 }
 
 sf::Vector2f Astronaut::getPos() const {

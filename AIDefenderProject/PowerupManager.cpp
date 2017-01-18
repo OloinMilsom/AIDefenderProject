@@ -1,11 +1,17 @@
 #include "PowerupManager.h"
 
 
+PowerupManager::PowerupManager()
+{
+	m_startTime = m_clock.getElapsedTime();
+	m_powerups.push_back(Powerup(0));
+}
 
 PowerupManager::PowerupManager(Player* player)
 {
 	m_player = player;
 	m_startTime = m_clock.getElapsedTime();
+	m_powerups.push_back(Powerup(0));
 }
 
 
@@ -15,20 +21,20 @@ PowerupManager::~PowerupManager()
 
 void PowerupManager::addPowerup(int type)
 {
-	bool needNew = true; //Temorary bool to check if a new bullet is needed
+	bool needNew = true; //Temorary bool to check if a new powerup is needed
 	
-	for (int i = 0; i < m_powerups.size(); i++) //for the size of the bullet vector
+	for (int i = 0; i < m_powerups.size(); i++) //for the size of the powerup vector
 	{
 	if (!m_powerups.at(i).getAlive())
 		{
 			m_powerups.at(i).reset(type);
-			needNew = false; //Don't need a new bullet
+			needNew = false; //Don't need a new powerup
 			break; //loop is no longer needed
 		}
 	}
 	if (needNew)
 	{
-		m_powerups.push_back(type); //Adds a bullet to the vector
+		m_powerups.push_back(type); //Adds a powerup to the vector
 	}
 
 }
@@ -39,14 +45,21 @@ void PowerupManager::update()
 	{
 		if (m_player->Collide(m_powerups.at(i).getRect()))
 		{
-			//Do Powerups on player
-			//player->addEffect(int ENUM);
+			m_powerups.at(i).trigger();
+			if (m_powerups.at(i).getType() == 0)
+			{
+				m_player->giveHyperJump();
+			}
+			else
+			{
+				//other powerup
+			}
 		}
-		
 	}
 
 	if (m_clock.getElapsedTime() - m_startTime > m_interval)
 	{
+		m_startTime = m_clock.getElapsedTime();
 		addPowerup(rand() % 2);
 	}
 }

@@ -4,10 +4,10 @@
 class Powerup
 {
 protected:
-	sf::Vector2f m_pos; //Position of powerup
+	//sf::Vector2f m_pos; //Position of powerup
 	sf::CircleShape m_sprite;
 	bool m_alive; //Is the powerup currently active
-	int m_type;
+	int m_type; //0 = hyperjump charge
 public:
 	Powerup(int);
 	~Powerup();

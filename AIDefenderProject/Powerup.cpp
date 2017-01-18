@@ -6,21 +6,40 @@ Powerup::Powerup(int type)
 {
 	m_type = type;
 	srand(time(NULL));
-	m_pos = sf::Vector2f(0, 0);
+	m_sprite = sf::CircleShape(10);
+	m_sprite.setPosition(sf::Vector2f(rand() % (800 * 9), rand() % 600));
 	m_alive = true;
+	
+	if (type == 0)
+	{
+		m_sprite.setFillColor(sf::Color::Yellow);
+	}
+	else
+	{
+		m_sprite.setFillColor(sf::Color::Blue);
+	}
 }
 
 void Powerup::reset(int type)
 {
 	m_type = type;
-	srand(time(NULL));
-	m_pos = sf::Vector2f(0, 0);
+	m_sprite.setPosition(sf::Vector2f(rand() % (800 * 9), rand() % 600));
 	m_alive = true;
+
+	if (type == 0)
+	{
+		m_sprite.setFillColor(sf::Color::Yellow);
+	}
+	else
+	{
+		m_sprite.setFillColor(sf::Color::Blue);
+	}
 }
 
 void Powerup::trigger()
 {
-	m_alive = false;
+	//m_alive = false;
+	m_sprite.setFillColor(sf::Color::White);
 }
 
 Powerup::~Powerup()

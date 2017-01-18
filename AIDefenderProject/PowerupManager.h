@@ -11,6 +11,7 @@ private:
 	sf::Time m_interval = sf::seconds(10.0f); 
 	Player * m_player;
 public:
+	PowerupManager();
 	PowerupManager(Player*);
 	~PowerupManager();
 

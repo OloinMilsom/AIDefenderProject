@@ -10,7 +10,6 @@ protected:
 	sf::Vector2f m_pos; //Position of bullet
 	sf::Vector2f m_vel; //Velocity of bullet
 
-
 	sf::Clock m_clock; //Clock for getting current time
 	sf::Time m_startTime; //Time that the bullet is created or reset
 

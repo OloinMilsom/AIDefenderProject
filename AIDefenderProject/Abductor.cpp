@@ -5,6 +5,8 @@ std::vector<int> Abductor::m_chasedIndices;
 Abductor::Abductor(sf::Vector2f position, float speed, float acceleration) : Alien(position, speed, acceleration), m_inFlock(false), m_chasing(false) {
 	m_type = AlienType::abductor;
 
+	m_health = 1;
+
 	m_angle = acos(-1) * 2 * static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 	m_acceleration = sf::Vector2f(cos(m_angle), sin(m_angle)) * MAX_ACCELERATION;
 

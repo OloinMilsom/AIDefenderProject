@@ -9,6 +9,9 @@ AlienNest::AlienNest(sf::Vector2f position, float speed, float acceleration) : A
 	m_sprite.setSize(sf::Vector2f(20, 10));
 	m_sprite.setFillColor(sf::Color::Magenta);
 
+	m_health = 1;
+	m_missileCount = 0;
+
 	resetSpawnTimer();
 }
 
@@ -23,7 +26,18 @@ void AlienNest::update(float dt, AlienManager * data) {
 		resetSpawnTimer();
 	}
 
+	if (m_missileCount < MAX_MISSILE)
+	{
+		fireMissile(data->getPlayer());
+	}
+
 	move(dt);
+}
+
+void AlienNest::fireMissile(const Player * player)
+{
+	BulletManager::getInstance()->addTrackingBullet(m_position, sf::Vector2f(300.0f, 100.0f), player->getPosPointer());
+	m_missileCount++;
 }
 
 

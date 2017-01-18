@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "Camera.h"
 #include "AlienManager.h"
+#include "BulletManager.h"
 
 class AlienManager;
 class Terrain;
@@ -26,12 +27,14 @@ protected:
 	sf::Vector2f m_velocity;
 	sf::Vector2f m_acceleration;
 	float m_angle;
+	int m_health;
 
 	void move(float dt);
 	void wander();
 	void avoidBounds(const Terrain * terrain);
 public:
 	Alien(sf::Vector2f pos, float speed, float acceleration);
+	void hit();
 	virtual void update(float dt, AlienManager * data) = 0;
 	void render(sf::RenderWindow * window, Camera * camera);
 	sf::Vector2f getPos();

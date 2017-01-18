@@ -44,6 +44,7 @@ private:
 	Terrain m_terrain;
 	std::vector<Astronaut> m_astronauts;
 	AlienManager * m_alienManager;
+	PowerupManager m_powerupManager;
 	
 	Camera m_camera;
 	sf::Clock m_clock;
