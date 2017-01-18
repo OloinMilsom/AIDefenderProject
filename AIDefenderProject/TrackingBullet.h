@@ -4,11 +4,11 @@ class TrackingBullet: public Bullet
 {
 private:
 	sf::Time lifeSpan = sf::seconds(10.0f); //The lifespan of a tracking bullet
-	const sf::Vector2f * m_target;
 public:
-	TrackingBullet(sf::Vector2f, sf::Vector2f, const sf::Vector2f * target);
+	TrackingBullet(sf::Vector2f, sf::Vector2f);
 	~TrackingBullet();
-	void update();
+	void reset(sf::Vector2f, sf::Vector2f);
+	void update(sf::Vector2f pos);
 	sf::Vector2f Normalize(sf::Vector2f);
 };
 

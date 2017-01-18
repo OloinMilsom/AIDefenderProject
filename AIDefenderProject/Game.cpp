@@ -19,6 +19,8 @@ Game::Game () {
 	m_camera = Camera(m_window->getSize().x, m_window->getSize().y, m_window->getSize().x * 9, m_window->getSize().y);
 
 	m_alienManager = new AlienManager(m_player, &m_astronauts, &m_terrain, &m_camera);	
+
+	m_obsticleManager = ObstacleManager();
 	
 	for (int i = 0; i < 20; i++) {
 		m_astronauts.push_back(Astronaut(rand() % (800 * 9), m_alienManager));
@@ -27,6 +29,8 @@ Game::Game () {
 	for (int i = 0; i < 20; i++) {
 		m_alienManager->addNest(sf::Vector2f(rand() % (800 * 9), rand() % 600));
 	}
+
+	m_collisionManager = CollisionManager(m_alienManager->getAlienPointer(), &m_astronauts, m_player, m_powerupManager.getPointer(), &m_camera);
 }
 
 void Game::update(float dt) {
@@ -41,11 +45,15 @@ void Game::update(float dt) {
 	m_camera.update(playerPos);
 	m_terrain.update();
 
-	BulletManager::getInstance()->update();
+	BulletManager::getInstance()->update(m_player->getPosition());
+
+	m_collisionManager.update();
 
 	m_alienManager->update(dt);
 
 	m_powerupManager.update();
+
+	m_obsticleManager.update();
 	
 	for (int i = 0; i < m_astronauts.size(); i++) {
 		m_astronauts[i].update(dt, &m_terrain);
@@ -64,9 +72,13 @@ void Game::render() {
 		m_astronauts[i].render(m_window, &m_camera);
 	}
 
-	m_alienManager->render(m_window, &m_camera);
-
 	m_powerupManager.render(m_window, &m_camera);
+
+	m_obsticleManager.render(m_window, &m_camera);
+
+	m_alienManager->render(m_window, &m_camera); //Needs to be last for minimap
+
+
 
 	// Finally, display rendered frame on screen 
 	m_window->display();
@@ -96,15 +108,7 @@ void Game::onEvent(sf::Event evt) {
 		case sf::Keyboard::Escape:
 			m_window->close();
 			break;
-		case sf::Keyboard::Space:
-			if (m_player->getDirection())
-			{
-				BulletManager::getInstance()->addBullet(m_player->getPosition(), sf::Vector2f(15.0f, 0), false); //Moving Right
-			}
-			else
-			{
-				BulletManager::getInstance()->addBullet(m_player->getPosition(), sf::Vector2f(-15.0f, 0), false); //Moving Left
-			}
+
 			
 		default:
 			break;

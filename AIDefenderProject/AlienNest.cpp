@@ -17,28 +17,32 @@ AlienNest::AlienNest(sf::Vector2f position, float speed, float acceleration) : A
 }
 
 void AlienNest::update(float dt, AlienManager * data) {
-	wander();
-	avoidBounds(data->getTerrain());
-	avoidPlayer(data->getPlayer(), data->getCamera());
-
-	m_spawnTimer -= dt;
-	if (m_spawnTimer < 0) {
-		data->addAbductor(m_position);
-		resetSpawnTimer();
-	}
-
-	if (m_missileCount < MAX_MISSILE)
+	if (m_alive)
 	{
-		fireMissile(data->getPlayer());
+		wander();
+		avoidBounds(data->getTerrain());
+		avoidPlayer(data->getPlayer(), data->getCamera());
+
+		m_spawnTimer -= dt;
+		if (m_spawnTimer < 0) {
+			data->addAbductor(m_position);
+			resetSpawnTimer();
+		}
+
+		if (m_missileCount < MAX_MISSILE)
+		{
+			fireMissile(data->getPlayer());
+		}
+
+		m_sprite.setTextureRect(sf::IntRect(abs(static_cast<int>(m_position.x / 30) % 6) * (m_tex.getSize().x / 6), 0, m_tex.getSize().x / 6, m_tex.getSize().y));
+		move(dt);
 	}
 
-	m_sprite.setTextureRect(sf::IntRect(abs(static_cast<int>(m_position.x / 30) % 6) * (m_tex.getSize().x / 6), 0, m_tex.getSize().x / 6, m_tex.getSize().y));
-	move(dt);
 }
 
 void AlienNest::fireMissile(const Player * player)
 {
-	BulletManager::getInstance()->addTrackingBullet(m_position, sf::Vector2f(300.0f, 100.0f), player->getPosPointer());
+	BulletManager::getInstance()->addTrackingBullet(m_position, sf::Vector2f(3.0f, 1.0f));
 	m_missileCount++;
 }
 

@@ -52,6 +52,7 @@ public:
 	~AlienManager(); //!< AlienManager destructor
 
 	const std::deque<Alien *> getAll() const; //!< get the Alien container
+	std::deque<Alien *> * getAlienPointer();
 
 	std::deque<Alien *>::iterator nestBegin(); //!< get the start iterator for AlienNest
 	std::deque<Alien *>::iterator nestEnd(); //!< get the end iterator for AlienNest

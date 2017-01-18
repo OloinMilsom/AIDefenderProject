@@ -12,6 +12,9 @@ Player::Player() : m_xVel(0) {
 	m_movingRight = true;
 	m_canHyperJump = true;
 	m_canSmartBomb = true;
+	m_canFire = true;
+
+	m_pos = sf::Vector2f(400, 300);
 }
 
 void Player::update(float dt) {
@@ -48,14 +51,6 @@ void Player::update(float dt) {
 		}
 		else {
 			m_xVel = 0;
-		}
-	}
-
-	for (int i = 0; i < BulletManager::getInstance()->getSize(); i++)
-	{
-		if (BulletManager::getInstance()->checkCollision(i, m_sprite) && BulletManager::getInstance()->getIsEnemyBullet(i))
-		{
-			//Do bullet collisions
 		}
 	}
 	
@@ -103,6 +98,20 @@ void Player::onEvent(sf::Event evt) {
 		case sf::Keyboard::E:
 			smartBomb();
 			break;
+		case sf::Keyboard::Space:
+			if (m_canFire)
+			{
+				if (getDirection())
+				{
+					BulletManager::getInstance()->addBullet(getPosition(), sf::Vector2f(15.0f, 0), false); //Moving Right
+				}
+				else
+				{
+					BulletManager::getInstance()->addBullet(getPosition(), sf::Vector2f(-15.0f, 0), false); //Moving Left
+				}
+				m_canFire = false;
+			}
+
 		default:
 			break;
 		}
@@ -121,6 +130,9 @@ void Player::onEvent(sf::Event evt) {
 			break;
 		case sf::Keyboard::D:
 			m_keyDowns[3] = false;
+			break;
+		case sf::Keyboard::Space:
+			m_canFire = true;
 			break;
 		default:
 			break;
@@ -162,6 +174,11 @@ void Player::hyperJump()
 	}
 }
 
+void Player::hit()
+{
+	m_health--;
+}
+
 void Player::giveHyperJump()
 {
 	m_canHyperJump = true;
@@ -172,17 +189,12 @@ bool Player::getDirection()
 	return m_movingRight;
 }
 
-bool Player::Collide(sf::RectangleShape rect)
+int Player::getHealth()
 {
-	return m_sprite.getTextureRect().intersects(rect.getTextureRect());
+	return m_health;
 }
 
-bool Player::Collide(sf::CircleShape circ)
+sf::Sprite Player::getSprite()
 {
-	return m_sprite.getTextureRect().intersects(circ.getTextureRect());
-}
-
-bool Player::Collide(sf::Vertex vert)
-{
-	return false;
+	return m_sprite;
 }

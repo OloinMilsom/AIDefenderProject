@@ -29,25 +29,34 @@ void MiniMap::render(sf::RenderWindow * window, int nestCount, int abductorCount
 	temp.setFillColor(sf::Color::Magenta); //colour for nests
 	for (int i = 0; i < nestCount; i++) //nests
 	{
-		temp.setPosition(m_aliens->at(i)->getPos().x / 9, m_aliens->at(i)->getPos().y / 9);
+		if (m_aliens->at(i) ->getAlive())
+		{
+			temp.setPosition(m_aliens->at(i)->getPos().x / 9, m_aliens->at(i)->getPos().y / 9);
 
-		window->draw(temp);
+			window->draw(temp);
+		}
 	}
 	
 	temp.setFillColor(sf::Color::Yellow); //Colour for abductors
 	for (int i = nestCount+1; i < nestCount+abductorCount; i++) //abductors
 	{
-		temp.setPosition(m_aliens->at(i)->getPos().x / 9, m_aliens->at(i)->getPos().y / 9);
+		if (m_aliens->at(i)->getAlive())
+		{
+			temp.setPosition(m_aliens->at(i)->getPos().x / 9, m_aliens->at(i)->getPos().y / 9);
 
-		window->draw(temp);
+			window->draw(temp);
+		}
 	}
 	
 	temp.setFillColor(sf::Color::Red); //Colour for mutants
 	for (int i = nestCount + abductorCount + 1; i <  m_aliens->size(); i++) //mutants
 	{
-		temp.setPosition(m_aliens->at(i)->getPos().x / 9, m_aliens->at(i)->getPos().y / 9);
+		if (m_aliens->at(i)->getAlive())
+		{
+			temp.setPosition(m_aliens->at(i)->getPos().x / 9, m_aliens->at(i)->getPos().y / 9);
 
-		window->draw(temp);
+			window->draw(temp);
+		}
 	}
 
 	

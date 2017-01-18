@@ -23,8 +23,11 @@ void Alien::render(sf::RenderWindow * window, Camera * camera) {
 	velAccel[3].position = (*camera) + m_position + m_acceleration;
 	velAccel[3].color = sf::Color::Green;
 	window->draw(velAccel);*/
+	if (m_alive)
+	{
+		window->draw((*camera) + m_sprite);
+	}
 
-	window->draw((*camera) + m_sprite);
 }
 
 void Alien::move(float dt) {
@@ -90,6 +93,11 @@ sf::Vector2f Alien::getVel() {
 
 sf::Vector2f Alien::getAccel() {
 	return m_acceleration;
+}
+
+bool Alien::getAlive()
+{
+	return m_alive;
 }
 
 sf::Sprite Alien::getSprite()

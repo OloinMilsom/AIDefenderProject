@@ -28,6 +28,11 @@ const std::deque<Alien*> AlienManager::getAll() const {
 	return m_aliens;
 }
 
+std::deque<Alien*>* AlienManager::getAlienPointer()
+{
+	return &m_aliens;
+}
+
 std::deque<Alien*>::iterator AlienManager::nestBegin() {
 	return m_aliens.begin();
 }

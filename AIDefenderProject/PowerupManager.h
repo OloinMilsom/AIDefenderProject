@@ -18,5 +18,6 @@ public:
 	void addPowerup(int);
 	void update();
 	void render(sf::RenderWindow * window, Camera * camera);
+	std::vector<Powerup>* getPointer();
 };
 

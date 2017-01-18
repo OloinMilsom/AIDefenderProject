@@ -17,74 +17,78 @@ Mutant::Mutant(sf::Vector2f position, float speed, float acceleration) : Alien(p
 }
 
 void Mutant::update(float dt, AlienManager * data) {
-	sf::Vector2f d = ((*data->getCamera()) + data->getPlayer()->getPosition()) - ((*data->getCamera()) + m_position);
-	switch (m_state) {
-	case MutantState::following:
-		wander();
-		avoidBounds(data->getTerrain());
-		moveToPlayer(data->getPlayer(), data->getCamera(), true);
-		swarm(data);
-		move(dt);
-		if (d.x * d.x + d.y * d.y < PLAYER_ATTACK_DISTANCE * PLAYER_ATTACK_DISTANCE) {
-			m_state = MutantState::attacking;
-			m_attackData.attackAngle = atan(d.y / d.x);
-			if (d.x > 0) {
-				m_attackData.attackAngle += acos(-1);
-			}
-			m_attackData.direction = 1;
-			if (rand() % 2 == 0) {
-				m_attackData.direction = -1;
-			}
-			m_attackData.attackDistance = sqrt(d.x * d.x + d.y * d.y) - PLAYER_ATTACK_DISTANCE;
+	if (m_alive)
+	{
+		sf::Vector2f d = ((*data->getCamera()) + data->getPlayer()->getPosition()) - ((*data->getCamera()) + m_position);
+		switch (m_state) {
+		case MutantState::following:
+			wander();
+			avoidBounds(data->getTerrain());
+			moveToPlayer(data->getPlayer(), data->getCamera(), true);
+			swarm(data);
+			move(dt);
+			if (d.x * d.x + d.y * d.y < PLAYER_ATTACK_DISTANCE * PLAYER_ATTACK_DISTANCE) {
+				m_state = MutantState::attacking;
+				m_attackData.attackAngle = atan(d.y / d.x);
+				if (d.x > 0) {
+					m_attackData.attackAngle += acos(-1);
+				}
+				m_attackData.direction = 1;
+				if (rand() % 2 == 0) {
+					m_attackData.direction = -1;
+				}
+				m_attackData.attackDistance = sqrt(d.x * d.x + d.y * d.y) - PLAYER_ATTACK_DISTANCE;
 
-			if (m_rotateCount < 3) {
-				m_attackType = AttackType::rotate;
-				m_rotateCount++;
-			}
-			else {
-				m_attackType = AttackType::dive;
-				m_diveCount++;
-			}
-		}
-		break;
-
-	case MutantState::attacking:
-		switch (m_attackType) {
-		case AttackType::rotate:
-			rotateAttack(dt, data);
-			if (m_rotateCount > 3) {
-				m_rotateCount--;
-				m_attackType = AttackType::dive;
-				m_diveCount++;
-			}
-			break; 
-
-		case AttackType::dive:
-			diveAttack(dt, data); 
-			if (m_rotateCount < 3) {
-				m_diveCount--;
-				m_attackType = AttackType::rotate;
-				m_rotateCount++;
+				if (m_rotateCount < 3) {
+					m_attackType = AttackType::rotate;
+					m_rotateCount++;
+				}
+				else {
+					m_attackType = AttackType::dive;
+					m_diveCount++;
+				}
 			}
 			break;
-		}
-		if (m_health <= 1) {
-			m_state = MutantState::fleeing;
-		}
-		m_sprite.setPosition(m_position);
-		break;
 
-	case MutantState::fleeing:
-		wander();
-		avoidBounds(data->getTerrain());
-		moveToPlayer(data->getPlayer(), data->getCamera(), false);
-		swarm(data);
-		move(dt);
-		break;
+		case MutantState::attacking:
+			switch (m_attackType) {
+			case AttackType::rotate:
+				rotateAttack(dt, data);
+				if (m_rotateCount > 3) {
+					m_rotateCount--;
+					m_attackType = AttackType::dive;
+					m_diveCount++;
+				}
+				break;
 
-	default:
-		break;
+			case AttackType::dive:
+				diveAttack(dt, data);
+				if (m_rotateCount < 3) {
+					m_diveCount--;
+					m_attackType = AttackType::rotate;
+					m_rotateCount++;
+				}
+				break;
+			}
+			if (m_health <= 1) {
+				m_state = MutantState::fleeing;
+			}
+			m_sprite.setPosition(m_position);
+			break;
+
+		case MutantState::fleeing:
+			wander();
+			avoidBounds(data->getTerrain());
+			moveToPlayer(data->getPlayer(), data->getCamera(), false);
+			swarm(data);
+			move(dt);
+			break;
+
+		default:
+			break;
+		}
 	}
+	
 }
 
 void Mutant::swarm(AlienManager * data) {

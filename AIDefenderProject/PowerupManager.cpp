@@ -72,3 +72,8 @@ void PowerupManager::render(sf::RenderWindow * window, Camera * camera)
 		m_powerups.at(i).render(window, camera);
 	}
 }
+
+std::vector<Powerup>* PowerupManager::getPointer()
+{
+	return &m_powerups;
+}

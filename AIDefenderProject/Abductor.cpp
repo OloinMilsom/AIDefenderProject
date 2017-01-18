@@ -16,17 +16,21 @@ Abductor::Abductor(sf::Vector2f position, float speed, float acceleration) : Ali
 }
 
 void Abductor::update(float dt, AlienManager * data) {
-	if (!m_chasing) {
-		flock(data);
-		wander();
-	}
-	if (!m_abducting) {
-		avoidBounds(data->getTerrain());
-	}
-	chaseAstronaut(data);
+	if (m_alive)
+	{
+		if (!m_chasing) {
+			flock(data);
+			wander();
+		}
+		if (!m_abducting) {
+			avoidBounds(data->getTerrain());
+		}
+		chaseAstronaut(data);
 
-	m_sprite.setTextureRect(sf::IntRect(abs(static_cast<int>(m_position.x / 15) % 6) * (m_tex.getSize().x / 6.0f), 0, m_tex.getSize().x / 6.0f, m_tex.getSize().y));
-	move(dt);
+		m_sprite.setTextureRect(sf::IntRect(abs(static_cast<int>(m_position.x / 15) % 6) * (m_tex.getSize().x / 6.0f), 0, m_tex.getSize().x / 6.0f, m_tex.getSize().y));
+		move(dt);
+	}
+	
 }
 
 void Abductor::flock(AlienManager * data) {
