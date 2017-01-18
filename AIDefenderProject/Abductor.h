@@ -25,6 +25,7 @@ private:
 	bool m_inFlock;
 	bool m_chasing;
 	bool m_abducting;
+	bool m_justDead;
 
 	void flock(AlienManager * data);
 	void combineAcceleration(sf::Vector2f other);

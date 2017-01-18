@@ -13,6 +13,8 @@ Abductor::Abductor(sf::Vector2f position, float speed, float acceleration) : Ali
 	m_tex.loadFromFile("Resources/Abductor.png");
 	m_sprite = sf::Sprite(m_tex, sf::IntRect(0, 0, m_tex.getSize().x / 6, m_tex.getSize().y));
 	m_sprite.setOrigin(m_tex.getSize().x / 12, m_tex.getSize().y / 2);
+
+	m_justDead = true;
 }
 
 void Abductor::update(float dt, AlienManager * data) {
@@ -29,6 +31,16 @@ void Abductor::update(float dt, AlienManager * data) {
 
 		m_sprite.setTextureRect(sf::IntRect(abs(static_cast<int>(m_position.x / 15) % 6) * (m_tex.getSize().x / 6.0f), 0, m_tex.getSize().x / 6.0f, m_tex.getSize().y));
 		move(dt);
+	}
+	else {
+		if (m_justDead) {
+			if (m_abducting || m_chasing) {
+				data->getAstronauts()->at(m_chaseIndex).setBeingAbducted(false);
+				data->getAstronauts()->at(m_chaseIndex).setFalling(true);
+				m_chasedIndices.erase(std::remove(m_chasedIndices.begin(), m_chasedIndices.end(), m_chaseIndex), m_chasedIndices.end());
+				m_justDead = false;
+			}
+		}
 	}
 	
 }

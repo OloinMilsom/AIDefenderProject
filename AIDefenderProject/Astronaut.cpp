@@ -1,6 +1,6 @@
 #include "Astronaut.h"
 
-Astronaut::Astronaut(float x, AlienManager * alienManager) : m_position(sf::Vector2f(x, 0)), m_alienManager(alienManager), m_beingAbducted(false) {
+Astronaut::Astronaut(float x, AlienManager * alienManager) : m_position(sf::Vector2f(x, 600)), m_alienManager(alienManager), m_beingAbducted(false), m_falling(false) {
 	m_tex.loadFromFile("Resources/Astronaut.png");
 	m_sprite = sf::Sprite(m_tex);// sf::IntRect(0, 0, m_tex.getSize().x, m_tex.getSize().y));
 	m_sprite.setOrigin(m_tex.getSize().x / 2, m_tex.getSize().y / 2);
@@ -19,16 +19,26 @@ Astronaut::Astronaut(float x, AlienManager * alienManager) : m_position(sf::Vect
 
 void Astronaut::update(float dt, Terrain * terrain) {
 	if (!m_beingAbducted && m_alive) {
-		if (isAlienNear()) {
-			avoid();
+		if (!m_falling) {
+			if (isAlienNear()) {
+				avoid();
+			}
+			else {
+				wander();
+			}
+
+			m_position.x += m_vel * dt;
+
+			m_position.y = terrain->getHeightAt(m_position.x + m_tex.getSize().x / 2) - m_tex.getSize().y / 2;
 		}
 		else {
-			wander();
+			m_position.y += 50 * dt;
+			float h = terrain->getHeightAt(m_position.x + m_tex.getSize().x / 2) - m_tex.getSize().y / 2;
+			if (h < m_position.y) {
+				m_position.y = h;
+				m_falling = false;
+			}
 		}
-
-		m_position.x += m_vel * dt;
-
-		m_position.y = terrain->getHeightAt(m_position.x + m_tex.getSize().x / 2) - m_tex.getSize().y / 2;
 	}
 	m_sprite.setTexture(m_tex);
 	m_sprite.setPosition(m_position);
@@ -105,4 +115,7 @@ void Astronaut::setAlive(bool val) {
 	m_alive = val;
 }
 
+void Astronaut::setFalling(bool val) {
+	m_falling = val;
+}
 

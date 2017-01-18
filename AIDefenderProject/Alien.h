@@ -63,6 +63,6 @@ public:
 	sf::Vector2f getVel(); //!< returns the Alien velocity
 	sf::Vector2f getAccel(); //!< returns the Alien acceleration
 	sf::Sprite getSprite(); //!< returns the Alien sprite
-	bool getAlive();
+	bool getAlive(); //!< returns the alien alive bool
 	AlienType getType(); //!< returns the Type of the Alien
 };

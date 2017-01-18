@@ -26,6 +26,7 @@ private:
 	int avoidTarget;
 	bool m_beingAbducted;
 	bool m_alive;
+	bool m_falling = false;
 
 public:
 	Astronaut(float x = 0, AlienManager * alienManager = nullptr); //!< Astronaut constructor
@@ -53,4 +54,5 @@ public:
 	void setPos(sf::Vector2f val); //!< astronaut position vector setter
 	void setBeingAbducted(bool val); //!< astronaut abducted bool setter
 	void setAlive(bool val); //!<astronaut alive bool setter
+	void setFalling(bool val);
 };
