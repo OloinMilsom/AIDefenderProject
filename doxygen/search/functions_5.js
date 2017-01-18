@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['game',['Game',['../class_game.html#ad59df6562a58a614fda24622d3715b65',1,'Game']]],
+  ['getaccel',['getAccel',['../class_alien.html#a00f66939b33c32f9f5f11f0097b7734b',1,'Alien']]],
+  ['getalive',['getAlive',['../class_alien.html#a6da0e947ec0c70d429e54511d67ad608',1,'Alien::getAlive()'],['../class_astronaut.html#a846e03bbd9c74739f9943fcccc9c9256',1,'Astronaut::getAlive()'],['../class_bullet.html#a75b9dbc9c7dc5f0dda65759bc895ac10',1,'Bullet::getAlive()'],['../class_powerup.html#a43e797bb2baedf42e391a5c81dbcd27f',1,'Powerup::getAlive()']]],
+  ['getall',['getAll',['../class_alien_manager.html#a0f6713bb3452f5949da43b870ac7b746',1,'AlienManager']]],
+  ['getastronauts',['getAstronauts',['../class_alien_manager.html#a0a2ffae7f5a87d94401b0a0375c02dcd',1,'AlienManager']]],
+  ['getbulletsize',['getBulletSize',['../class_bullet_manager.html#abb60f96ea2a1fde002fb10dd56beab21',1,'BulletManager']]],
+  ['getcamera',['getCamera',['../class_alien_manager.html#aeaf8bdda166e1db2b0694447e467820c',1,'AlienManager']]],
+  ['getdirection',['getDirection',['../class_player.html#a55ab1bb46619242418ef5c7d104efe23',1,'Player']]],
+  ['getheightat',['getHeightAt',['../class_terrain.html#a55305fd05a936176147512200921372a',1,'Terrain']]],
+  ['getisenemybullet',['getIsEnemyBullet',['../class_bullet.html#a9553313fc54ced53b8f0952f519c0d8d',1,'Bullet::getIsEnemyBullet()'],['../class_bullet_manager.html#a923c9563f241934310838bbbb7864dda',1,'BulletManager::getIsEnemyBullet()']]],
+  ['getmtv',['getMTV',['../class_terrain.html#aa0079612e37f31e2b3cba9f4de36c255',1,'Terrain']]],
+  ['getplayer',['getPlayer',['../class_alien_manager.html#a40c5a7ffc4c38f3c970f63936a87ccd8',1,'AlienManager']]],
+  ['getpos',['getPos',['../class_alien.html#aa9aefdfec02345614bca8ad45779df49',1,'Alien::getPos()'],['../class_astronaut.html#a0ff0404afaa68a7f997f06c2b31da64d',1,'Astronaut::getPos()']]],
+  ['getposition',['getPosition',['../class_player.html#a4f679a9d2fa60e76fe00d615dfe4d584',1,'Player']]],
+  ['getpospointer',['getPosPointer',['../class_player.html#a440aa918dadf0bc86901d915a303333a',1,'Player']]],
+  ['getsprite',['getSprite',['../class_alien.html#aa3f4e3041473ac0442ea30347f5c1d23',1,'Alien::getSprite()'],['../class_powerup.html#a5bb0ff913f4d1865b56df1146e141e54',1,'Powerup::getSprite()']]],
+  ['getterrain',['getTerrain',['../class_alien_manager.html#a5c6478a22609ee2f69a754a3e20c5cc4',1,'AlienManager']]],
+  ['gettype',['getType',['../class_alien.html#afaa2d6ceb2bd11b135b22db941d4a1a1',1,'Alien::getType()'],['../class_powerup.html#ac65d7fcad3511c3cae380ff75df975de',1,'Powerup::getType()']]],
+  ['getvel',['getVel',['../class_alien.html#adeddf8c801bcd1c0e18d3bd5323cb287',1,'Alien']]],
+  ['givehyperjump',['giveHyperJump',['../class_player.html#a7a554ba8f827c86a2c17e9d3a347627e',1,'Player']]]
+];
