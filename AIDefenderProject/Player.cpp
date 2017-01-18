@@ -11,7 +11,6 @@ Player::Player() : m_xVel(0) {
 
 	m_movingRight = true;
 	m_canHyperJump = true;
-	m_canSmartBomb = true;
 	m_canFire = true;
 
 	m_pos = sf::Vector2f(400, 300);
@@ -54,10 +53,6 @@ void Player::update(float dt) {
 		}
 	}
 	
-	if (m_clock.getElapsedTime() - m_lastBombUsed > m_bombCooldown && !m_canSmartBomb)
-	{
-		m_canSmartBomb = true;
-	}
 
 	m_pos.x += m_xVel * dt;
 	m_sprite.setTextureRect(sf::IntRect(abs(static_cast<int>(m_pos.x / 15) % 2) * (m_tex.getSize().x / 2), 0, m_tex.getSize().x / 2, m_tex.getSize().y));
@@ -95,8 +90,6 @@ void Player::onEvent(sf::Event evt) {
 		case sf::Keyboard::Q:
 			hyperJump();
 			break;
-		case sf::Keyboard::E:
-			smartBomb();
 			break;
 		case sf::Keyboard::Space:
 			if (m_canFire)
@@ -154,15 +147,6 @@ const sf::Vector2f * Player::getPosPointer() const
 
 void Player::setPosition(sf::Vector2f val) {
 	m_pos = val;
-}
-
-void Player::smartBomb()
-{
-	if (true)
-	{
-		m_lastBombUsed = m_clock.getElapsedTime();
-		BulletManager::getInstance()->smartBomb();
-	}
 }
 
 void Player::hyperJump()

@@ -14,11 +14,24 @@ Mutant::Mutant(sf::Vector2f position, float speed, float acceleration) : Alien(p
 	m_tex.loadFromFile("Resources/Mutant.png");
 	m_sprite = sf::Sprite(m_tex, sf::IntRect(0, 0, m_tex.getSize().x, m_tex.getSize().y));
 	m_sprite.setOrigin(m_tex.getSize().x / 2, m_tex.getSize().y / 2);
+
+	srand(time(NULL));
 }
 
 void Mutant::update(float dt, AlienManager * data) {
 	if (m_alive)
 	{
+		if (rand() % 100 == 1)
+		{
+			if (data->getPlayer()->getPosition().x > m_position.x)
+			{
+				BulletManager::getInstance()->addBullet(m_position, sf::Vector2f(15.0f, 0), true); //Moving Right
+			}
+			else
+			{
+				BulletManager::getInstance()->addBullet(m_position, sf::Vector2f(-15.0f, 0), true); //Moving Left
+			}
+		}
 		sf::Vector2f d = ((*data->getCamera()) + data->getPlayer()->getPosition()) - ((*data->getCamera()) + m_position);
 		switch (m_state) {
 		case MutantState::following:

@@ -119,3 +119,14 @@ void Astronaut::setFalling(bool val) {
 	m_falling = val;
 }
 
+void Astronaut::hit()
+{
+	m_alive = false;
+}
+
+sf::Sprite Astronaut::getSprite()
+{
+	return m_sprite;
+}
+
+

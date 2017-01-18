@@ -5,7 +5,7 @@ CollisionManager::CollisionManager()
 
 }
 
-CollisionManager::CollisionManager(std::deque<Alien *>* aliens, std::vector<Astronaut> * astronauts, Player * player, std::vector<Powerup> * powerups, Camera * camera)
+CollisionManager::CollisionManager(std::deque<Alien *>* aliens, std::vector<Astronaut> * astronauts, Player * player, std::vector<Powerup> * powerups, std::vector<Obstacle> * obstacles, Camera * camera)
 {
 	m_aliens = aliens;
 	m_astronauts = astronauts;
@@ -14,6 +14,7 @@ CollisionManager::CollisionManager(std::deque<Alien *>* aliens, std::vector<Astr
 	m_missiles = BulletManager::getInstance()->getMissilePointer();
 	m_powerups = powerups;
 	m_camera = camera;
+	m_obstacles = obstacles;
 }
 
 
@@ -57,13 +58,14 @@ void CollisionManager::update()
 		{
 			if (Collide(m_player->getSprite(), m_missiles->at(i).getSprite()))
 			{
-				//Player hit by missile
+				m_player->hit();
+				m_missiles->at(i).hit();
 				break;
 			}
 		}
 	}
 
-	for (int i = 0; i < m_aliens->size(); i++)
+	for (int i = 0; i < m_aliens->size(); i++) //Alien collisions
 	{
 		if (m_aliens->at(i)->getAlive())
 		{
@@ -73,6 +75,32 @@ void CollisionManager::update()
 				m_aliens->at(i)->hit();
 			}
 		}
+	}
+
+	for (int i = 0; i < m_obstacles->size(); i++) //Obstacle collisions
+	{
+		if (Collide(m_player->getSprite(), m_obstacles->at(i).getSprite())) //with player
+		{
+			m_player->hit();
+			m_obstacles->at(i).reset();
+		}
+		for (int j = 0; j < m_aliens->size(); j++) //with aliens
+		{
+			if (Collide(m_aliens->at(j)->getSprite(), m_obstacles->at(i).getSprite()))
+			{
+				m_aliens->at(j)->hit();
+				m_obstacles->at(i).reset();
+			}
+		}
+		for (int j = 0; j < m_astronauts->size(); j++) //With astronauts
+		{
+			if (Collide(m_astronauts->at(i).getSprite(), m_obstacles->at(i).getSprite()))
+			{
+				m_astronauts->at(i).hit();
+				m_obstacles->at(i).reset();
+			}
+		}
+
 	}
 
 

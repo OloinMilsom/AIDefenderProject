@@ -9,9 +9,9 @@ AlienManager::AlienManager(Player * player, std::vector<Astronaut>* astronauts, 
 	:m_player(player), 
 	 m_astronauts(astronauts),
 	 m_terrain(terrain),
-	 m_camera(camera)
-	 {
-	m_map = new MiniMap(&m_aliens, astronauts, player);
+	 m_camera(camera),
+	 m_map(new MiniMap(&m_aliens, astronauts, player)){
+	m_lastBombUsed = m_clock.getElapsedTime() - m_bombCooldown;
 }
 
 AlienManager::~AlienManager() {
@@ -114,6 +114,23 @@ void AlienManager::addAbductor(sf::Vector2f position) {
 
 void AlienManager::addMutant(sf::Vector2f position) {
 	m_additionStage.push_back(std::make_pair(AlienType::mutant, position));
+}
+
+void AlienManager::smartBomb()
+{
+	if (m_clock.getElapsedTime() - m_lastBombUsed > m_bombCooldown)
+	{
+		m_lastBombUsed = m_clock.getElapsedTime();
+		sf::Vector2f temp;
+		for (int i = 0; i < m_aliens.size(); i++)
+		{
+			temp = ((*m_camera) + m_player->getPosition()) - ((*m_camera) + m_aliens.at(i)->getPos());
+			if (temp.x < 420 && temp.x > -420)
+			{
+				m_aliens.at(i)->hit();
+			}
+		}
+	}
 }
 
 #pragma endregion

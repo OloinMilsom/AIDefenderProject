@@ -10,9 +10,13 @@ intervals.
 */
 class AlienNest : public Alien {
 private:
-	const int MAX_MISSILE = 2;
-	int m_missileCount;
+	bool m_missileA;
+	bool m_missileB;
 	float m_spawnTimer;
+	sf::Clock m_clock; //Clock for getting current time
+	sf::Time m_missileATime; //Time that the bullet is created or reset
+	sf::Time m_missileBTime; //Time that the bullet is created or reset
+	sf::Time m_missileCooldown = sf::seconds(10.0f);
 
 	void avoidPlayer(const Player * player, const Camera * camera);
 	void resetSpawnTimer();

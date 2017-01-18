@@ -28,11 +28,8 @@ private:
 	bool m_keyDowns[4]; // 0 = W, 1 = A, 2 = S, 3 = D
 	bool m_movingRight;
 	bool m_canHyperJump;
-	bool m_canSmartBomb;
 	bool m_canFire;
-	sf::Clock m_clock; //Clock for getting current time
-	sf::Time m_lastBombUsed; //Time that the bullet is created or reset
-	sf::Time m_bombCooldown = sf::seconds(60.0f);
+
 	float m_xVel;
 public:
 	Player(); //!< Player constructor
@@ -50,7 +47,6 @@ public:
 	sf::Vector2f getPosition() const; //!< Player position vector accessor
 	const sf::Vector2f* getPosPointer() const; //!< Player position vector as pointer accessor
 	void setPosition(sf::Vector2f); //!< Player position vector setter
-	void smartBomb(); //!< Player use a smart bomb
 	void hyperJump(); //!< Player use a hyperjump
 	void hit();
 	void giveHyperJump(); //!< Give Player a hyperjump use

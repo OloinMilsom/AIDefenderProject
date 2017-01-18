@@ -55,4 +55,6 @@ public:
 	void setBeingAbducted(bool val); //!< astronaut abducted bool setter
 	void setAlive(bool val); //!<astronaut alive bool setter
 	void setFalling(bool val);
+	void hit();
+	sf::Sprite getSprite();
 };

@@ -37,6 +37,10 @@ private:
 	std::vector<std::pair<AlienType, sf::Vector2f>> m_additionStage;	// addition stage prevents invalid iterators being created
 																		// from addition into the alien container
 
+	sf::Clock m_clock; //Clock for getting current time
+	sf::Time m_lastBombUsed; //Time that the bullet is created or reset
+	sf::Time m_bombCooldown = sf::seconds(60.0f);
+
 	void clearAdditionStage();	// this container holds any additions until iteration through the alien list concludes
 
 	MiniMap * m_map;
@@ -70,6 +74,8 @@ public:
 	void addNest(sf::Vector2f position); //!< adds an AlienNest to Alien container
 	void addAbductor(sf::Vector2f position); //!< adds an Abductor to Alien container
 	void addMutant(sf::Vector2f position); //!< adds an Mutant to Alien container
+
+	void smartBomb();
 
 	//! Updates all the Alien objects
 	/*!

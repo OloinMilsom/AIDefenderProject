@@ -11,7 +11,10 @@ AlienNest::AlienNest(sf::Vector2f position, float speed, float acceleration) : A
 	m_sprite.setOrigin(m_tex.getSize().x / 12, m_tex.getSize().y / 2);
 
 	m_health = 1;
-	m_missileCount = 0;
+	m_missileA = true;
+	m_missileB = true;
+
+	srand(time(NULL));
 
 	resetSpawnTimer();
 }
@@ -29,9 +32,30 @@ void AlienNest::update(float dt, AlienManager * data) {
 			resetSpawnTimer();
 		}
 
-		if (m_missileCount < MAX_MISSILE)
+		if (rand() % 1000 == 1)
 		{
-			fireMissile(data->getPlayer());
+			if (m_missileA)
+			{
+				fireMissile(data->getPlayer());
+				m_missileA = false;
+				m_missileATime = m_clock.getElapsedTime();
+			}
+			else if (m_missileB)
+			{
+				fireMissile(data->getPlayer());
+				m_missileB = false;
+				m_missileBTime = m_clock.getElapsedTime();
+			}
+			
+		}
+
+		if (m_clock.getElapsedTime() - m_missileATime > m_missileCooldown && !m_missileA)
+		{
+			m_missileA = true;
+		}
+		if (m_clock.getElapsedTime() - m_missileBTime > m_missileCooldown && !m_missileB)
+		{
+			m_missileB = true;
 		}
 
 		m_sprite.setTextureRect(sf::IntRect(abs(static_cast<int>(m_position.x / 30) % 6) * (m_tex.getSize().x / 6), 0, m_tex.getSize().x / 6, m_tex.getSize().y));
@@ -43,7 +67,6 @@ void AlienNest::update(float dt, AlienManager * data) {
 void AlienNest::fireMissile(const Player * player)
 {
 	BulletManager::getInstance()->addTrackingBullet(m_position, sf::Vector2f(3.0f, 1.0f));
-	m_missileCount++;
 }
 
 

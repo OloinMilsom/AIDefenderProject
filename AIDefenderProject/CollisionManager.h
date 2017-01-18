@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "BulletManager.h"
 #include "PowerupManager.h"
+#include "Obstacle.h"
 #include "Camera.h"
 
 class CollisionManager
@@ -17,11 +18,12 @@ private:
 	std::vector<Bullet> * m_bullets;
 	std::vector<TrackingBullet> * m_missiles;
 	std::vector<Powerup>* m_powerups;
+	std::vector<Obstacle> * m_obstacles;
 	Camera * m_camera;
 
 public:
 	CollisionManager();
-	CollisionManager(std::deque<Alien *>*, std::vector<Astronaut> *, Player *, std::vector<Powerup>*, Camera *);
+	CollisionManager(std::deque<Alien *>*, std::vector<Astronaut> *, Player *, std::vector<Powerup>*,std::vector<Obstacle> *, Camera *);
 	~CollisionManager();
 
 	void update();
