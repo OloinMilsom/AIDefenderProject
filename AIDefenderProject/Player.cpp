@@ -127,7 +127,7 @@ sf::Vector2f Player::getPosition() const {
 	return m_pos;
 }
 
-const sf::Vector2f * Player::getPosPointer()
+const sf::Vector2f * Player::getPosPointer() const
 {
 	return &m_pos;
 }

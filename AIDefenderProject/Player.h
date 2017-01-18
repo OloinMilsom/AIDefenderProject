@@ -27,7 +27,7 @@ public:
 	void render(sf::RenderWindow * window, Camera * camera);
 	void onEvent(sf::Event evt);
 	sf::Vector2f getPosition() const;
-	const sf::Vector2f* getPosPointer();
+	const sf::Vector2f* getPosPointer() const;
 	void setPosition(sf::Vector2f);
 	void smartBomb();
 	void hyperJump();
