@@ -25,8 +25,6 @@ public:
 	void addBullet(sf::Vector2f, sf::Vector2f, bool);
 	void addTrackingBullet(sf::Vector2f, sf::Vector2f);
 	void update(sf::Vector2f pos);
-	void smartBomb();
-	bool checkCollision(int, sf::Sprite);
 	void render(sf::RenderWindow * window, Camera * camera);
 
 	bool getIsEnemyBullet(int index);

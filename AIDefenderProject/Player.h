@@ -21,11 +21,8 @@ private:
 	bool m_keyDowns[4]; // 0 = W, 1 = A, 2 = S, 3 = D
 	bool m_movingRight;
 	bool m_canHyperJump;
-	bool m_canSmartBomb;
 	bool m_canFire;
-	sf::Clock m_clock; //Clock for getting current time
-	sf::Time m_lastBombUsed; //Time that the bullet is created or reset
-	sf::Time m_bombCooldown = sf::seconds(60.0f);
+
 	float m_xVel;
 public:
 	Player();
@@ -35,7 +32,6 @@ public:
 	sf::Vector2f getPosition() const;
 	const sf::Vector2f* getPosPointer() const;
 	void setPosition(sf::Vector2f);
-	void smartBomb();
 	void hyperJump();
 	void hit();
 	void giveHyperJump();

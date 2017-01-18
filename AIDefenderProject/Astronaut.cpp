@@ -105,4 +105,14 @@ void Astronaut::setAlive(bool val) {
 	m_alive = val;
 }
 
+void Astronaut::hit()
+{
+	m_alive = false;
+}
+
+sf::Sprite Astronaut::getSprite()
+{
+	return m_sprite;
+}
+
 

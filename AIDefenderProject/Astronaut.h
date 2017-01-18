@@ -34,4 +34,6 @@ public:
 	void setPos(sf::Vector2f val);
 	void setBeingAbducted(bool val);
 	void setAlive(bool val);
+	void hit();
+	sf::Sprite getSprite();
 };

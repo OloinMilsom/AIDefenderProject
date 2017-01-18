@@ -30,7 +30,7 @@ Game::Game () {
 		m_alienManager->addNest(sf::Vector2f(rand() % (800 * 9), rand() % 600));
 	}
 
-	m_collisionManager = CollisionManager(m_alienManager->getAlienPointer(), &m_astronauts, m_player, m_powerupManager.getPointer(), &m_camera);
+	m_collisionManager = CollisionManager(m_alienManager->getAlienPointer(), &m_astronauts, m_player, m_powerupManager.getPointer(),m_obsticleManager.getPointer(), &m_camera);
 }
 
 void Game::update(float dt) {
@@ -107,6 +107,9 @@ void Game::onEvent(sf::Event evt) {
 		switch (evt.key.code) {
 		case sf::Keyboard::Escape:
 			m_window->close();
+			break;
+		case sf::Keyboard::E:
+			m_alienManager->smartBomb();
 			break;
 
 			

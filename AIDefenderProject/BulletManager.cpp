@@ -69,11 +69,6 @@ void BulletManager::update(sf::Vector2f pos)
 	}
 }
 
-void BulletManager::smartBomb()
-{
-	//do smart bomb
-}
-
 void BulletManager::render(sf::RenderWindow * window, Camera * camera)
 {
 	for (int i = 0; i < m_bullets.size(); i++)
@@ -84,11 +79,6 @@ void BulletManager::render(sf::RenderWindow * window, Camera * camera)
 	{
 		m_missiles.at(i).render(window, camera);
 	}
-}
-
-bool BulletManager::checkCollision(int index, sf::Sprite sprite) 
-{
-	return sprite.getGlobalBounds().contains(m_bullets.at(index).getPos()); //Takes the rect from the player or enemy's rectangle shape and checks if it contains the bullet
 }
 
 bool BulletManager::getIsEnemyBullet(int index) { return m_bullets.at(index).getIsEnemyBullet(); }
