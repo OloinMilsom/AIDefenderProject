@@ -11,6 +11,12 @@ class Alien;
 class Astronaut;
 enum AlienType;
 
+//! Manages Alien objects
+/*!
+Manages the creation, deletion, updating and rendering of all Alien objects. Provides
+an interface to all aliens for other classes. Contains pointers to game data for
+Alien update.
+*/
 class AlienManager {
 private:
 	std::deque<Alien *> m_aliens;	// aliens will be ordered such that nests will come first,
@@ -32,33 +38,45 @@ private:
 	void clearAdditionStage();	// this container holds any additions until iteration through the alien list concludes
 
 public:
-	// constructor/destructor
+	//! AlienManager constructor
+	/*!
+		\param player pointer for Player game data		
+		\param astronauts pointer for Astronaut game data
+		\param terrain pointer for Terrain game data
+		\param camera pointer for Camera game data
+	*/
 	AlienManager(Player * player, std::vector<Astronaut> * astronauts, Terrain * terrain, Camera * camera);
-	~AlienManager();
+	~AlienManager(); //!< AlienManager destructor
 
-	// get all the aliens
-	const std::deque<Alien *> getAll() const;
+	const std::deque<Alien *> getAll() const; //!< get the Alien container
 
-	// iterators to access different alien types;
-	std::deque<Alien *>::iterator nestBegin();
-	std::deque<Alien *>::iterator nestEnd();
-	std::deque<Alien *>::iterator abductorBegin();
-	std::deque<Alien *>::iterator abductorEnd();
-	std::deque<Alien *>::iterator mutantBegin();
-	std::deque<Alien *>::iterator mutantEnd();
+	std::deque<Alien *>::iterator nestBegin(); //!< get the start iterator for AlienNest
+	std::deque<Alien *>::iterator nestEnd(); //!< get the end iterator for AlienNest
+	std::deque<Alien *>::iterator abductorBegin(); //!< get the start iterator for Abductor
+	std::deque<Alien *>::iterator abductorEnd(); //!< get the end iterator for Abductor
+	std::deque<Alien *>::iterator mutantBegin(); //!< get the start iterator for Mutant
+	std::deque<Alien *>::iterator mutantEnd(); //!< get the end iterator for Mutant
 
-	// get the game data for alien behaviours
-	std::vector<Astronaut> * getAstronauts();
-	const Player * getPlayer();
-	const Terrain * getTerrain();
-	const Camera * getCamera();
+	std::vector<Astronaut> * getAstronauts(); //!< get the Astronaut game data
+	const Player * getPlayer(); //!< get the Player game data
+	const Terrain * getTerrain(); //!< get the Terrain game data
+	const Camera * getCamera(); //!< get the Camera game data
 
-	// add aliens to the addition stage
-	void addNest(sf::Vector2f position);
-	void addAbductor(sf::Vector2f position);
-	void addMutant(sf::Vector2f position);
+	void addNest(sf::Vector2f position); //!< adds an AlienNest to Alien container
+	void addAbductor(sf::Vector2f position); //!< adds an Abductor to Alien container
+	void addMutant(sf::Vector2f position); //!< adds an Mutant to Alien container
 
-	// update and render
+	//! Updates all the Alien objects
+	/*!
+	\param dt delta time since last frame
+	*/
 	void update(float dt);
+
+	//! Renders all the Alien objects
+	/*!
+	\param window SFML window to render to
+	\param camera adjusts positions based on the camera position
+	draws Alien to the screen
+	*/
 	void render(sf::RenderWindow * window, Camera * camera);
 };

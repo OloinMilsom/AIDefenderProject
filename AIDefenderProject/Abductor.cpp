@@ -106,8 +106,8 @@ void Abductor::chaseAstronaut(AlienManager * data) {
 			m_acceleration = ((*data->getCamera()) + astronauts->at(m_chaseIndex).getPos()) - ((*data->getCamera()) + m_position);
 			m_acceleration /= sqrt(m_acceleration.x * m_acceleration.x + m_acceleration.y * m_acceleration.y);
 
-			if ((astronauts->at(m_chaseIndex).getPos().x - m_position.x) * (astronauts->at(m_chaseIndex).getPos().x - m_position.x) +
-				(astronauts->at(m_chaseIndex).getPos().y - m_position.y) * (astronauts->at(m_chaseIndex).getPos().y - m_position.y) < ABDUCT_DISTANCE * ABDUCT_DISTANCE) {
+			sf::Vector2f d = ((*data->getCamera()) + astronauts->at(m_chaseIndex).getPos()) - ((*data->getCamera()) + m_position);
+			if (d.x * d.x + d.y * d.y < ABDUCT_DISTANCE * ABDUCT_DISTANCE) {
 				m_abducting = true;
 				m_velocity = sf::Vector2f(0, -15);
 				m_acceleration = sf::Vector2f(0, 0);
